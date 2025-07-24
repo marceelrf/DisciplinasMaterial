@@ -11,7 +11,7 @@
 
   <meta name="author" content="Marcel Ferreira">
   <meta name="dcterms.date" content="2025-07-24">
-  <title>Nanopore</title>
+  <title>Sequenciamento de Terceira Geração com Oxford Nanopore</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,7 +29,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="nanopore_files/libs/revealjs/dist/theme/quarto-423d414d36ce366a9d05f36d06304417.css">
   <link href="nanopore_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="nanopore_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -130,7 +150,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Nanopore</h1>
+  <h1 class="title">Sequenciamento de Terceira Geração com Oxford Nanopore</h1>
+  <p class="subtitle">Princípios e Aplicações em Bioinformática</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -171,7 +192,7 @@ Marcel Ferreira
 </ul>
 <p><br></p>
 <ul>
-<li>Desde 2023, pós-doutarado em genética;</li>
+<li>Desde 2023, pós-doutorado em genética;</li>
 </ul>
 </div></div>
 </section>
@@ -206,10 +227,10 @@ Marcel Ferreira
 <figure>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="https://isbet.org.br/diversidade-no-estagio-e-jovem-aprendiz/"><img data-src="https://isbet.org.br/wp-content/uploads/2024/08/grupo-de-jovens-multirraciais-sorrindo-para-a-camera-conceito-de-amizade-e-diversidade_442523-605.webp" class="quarto-figure quarto-figure-center" width="1200" alt="Diversidade"></a></p>
+<p><a href="https://isbet.org.br/diversidade-no-estagio-e-jovem-aprendiz/"><img data-src="https://isbet.org.br/wp-content/uploads/2024/08/grupo-de-jovens-multirraciais-sorrindo-para-a-camera-conceito-de-amizade-e-diversidade_442523-605.webp" class="quarto-figure quarto-figure-center" width="780" alt="Diversidade: como podemos utilizar DNA para predizer o fenótipo!"></a></p>
 </figure>
 </div>
-<figcaption>Diversidade</figcaption>
+<figcaption>Diversidade: como podemos utilizar DNA para predizer o fenótipo!</figcaption>
 </figure>
 </div>
 </section>
@@ -256,6 +277,10 @@ Marcel Ferreira
 <ul>
 <li>Vamos aprofundar sobre aspectos de bioinformática das análises;</li>
 </ul>
+<p><br></p>
+<ul>
+<li>Vamos focar em <strong><em>genômica</em></strong> e <strong><em>epigenômica</em></strong>;</li>
+</ul>
 </section>
 <section id="desafios" class="slide level2">
 <h2>Desafios 🚵</h2>
@@ -263,12 +288,13 @@ Marcel Ferreira
 <li><p>Bancada..</p></li>
 <li><p>Requisitos computacionais…</p></li>
 <li><p>Tempo…</p></li>
+<li><p>Programas…</p></li>
 </ul>
 </section>
 <section id="material-online" class="slide level2">
 <h2>Material online</h2>
 <ul>
-<li>Esses slides;</li>
+<li><a href="https://marceelrf.quarto.pub/nanopore_genetica">Esses slides</a>;</li>
 </ul>
 <p><br></p>
 <ul>
@@ -310,15 +336,362 @@ Marcel Ferreira
 </section>
 <section id="bioinformática" class="slide level2">
 <h2>Bioinformática</h2>
+<ul>
+<li>NIH: “<em>Bioinformatics, as related to genetics and genomics, is a scientific subdiscipline that involves using computer technology to collect, store, analyze and disseminate biological data and information, such as DNA and amino acid sequences or annotations about those sequences.</em>”</li>
+</ul>
+
+<aside><div>
+<p>NIH: National Institute of Health</p>
+</div></aside></section>
+<section id="bioinformática-1" class="slide level2">
+<h2>Bioinformática</h2>
+<ul>
+<li>NIH: “<em>Bioinformatics, as related to <strong>genetics</strong> and <strong>genomics</strong>, is a scientific subdiscipline that involves using computer technology to <strong>collect</strong>, <strong>store</strong>, <strong>analyze</strong> and <strong>disseminate</strong> biological data and information, such as <strong>DNA</strong> and <strong>amino acid sequences</strong> or annotations about those sequences.</em>”</li>
+</ul>
+
+<aside><div>
+<p>NIH: National Institute of Health</p>
+</div></aside></section>
+<section id="cronograma" class="slide level2">
+<h2>Cronograma</h2>
+</section>
+<section id="programas-e-dados" class="slide level2">
+<h2>Programas e dados</h2>
+<ul>
+<li>Baixar arquivos do Drive [link];</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Instalar o IGV <span class="citation" data-cites="robinson2011">(<a href="#/referências" role="doc-biblioref" onclick="">Robinson et al. 2011</a>)</span> [<a href="https://igv.org/doc/desktop/">link</a>];</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Usar o script de instalação dos programas no Linux;</li>
+</ul>
 </section></section>
-<section id="referências" class="title-slide slide level1 center">
+<section>
+<section id="sequenciamento-via-ont" class="title-slide slide level1 center">
+<h1>Sequenciamento via ONT</h1>
+
+</section>
+<section id="ordens-de-grandeza-do-genoma-humano" class="slide level2">
+<h2>Ordens de Grandeza do Genoma Humano</h2>
+<ul>
+<li><p>Número de cromossomos: 46 (23 pares);</p></li>
+<li><p>Tamanho do genoma haploide: ~3,2 bilhões de pares de bases (3,2 Gb);</p></li>
+<li><p>Número estimado de genes codificadores de proteínas: ~20.000;</p></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+
+<img data-src="humanchr.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="por-que-sequenciar" class="slide level2">
+<h2>Por que sequenciar?</h2>
+<div class="fragment">
+<ul>
+<li><p>A sequência é a “receita” da vida</p>
+<ul>
+<li>Ela determina a estrutura e função das moléculas biológicas.</li>
+</ul></li>
+<li><p><strong>DNA</strong> → <strong>RNA</strong> → <strong>Proteína</strong></p>
+<ul>
+<li>Alterações na sequência podem afetar a função celular e causar doenças.</li>
+</ul></li>
+<li><p>Entender a sequência = entender o funcionamento dos organismos</p>
+<ul>
+<li>Do gene à característica observável (fenótipo).</li>
+</ul></li>
+<li><p>Permite identificar diferenças genéticas</p>
+<ul>
+<li>Entre indivíduos, espécies, populações ou células (ex: câncer).</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="geração-de-sequenciamento" class="slide level2">
+<h2>Geração de sequenciamento</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://pit.edu.vn/en/post/generations-of-gene-sequencing-technology-139.htm"><img data-src="seqgens.png" alt="https://pit.edu.vn/en/post/generations-of-gene-sequencing-technology-139.htm"></a></p>
+<figcaption>https://pit.edu.vn/en/post/generations-of-gene-sequencing-technology-139.htm</figcaption>
+</figure>
+</div>
+</section>
+<section id="sequenciamento-comparativo-entre-plataformas" class="slide level2">
+<h2>Sequenciamento: Comparativo entre Plataformas</h2>
+<p><br></p>
+<div style="font-size:80%;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 21%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Plataforma</strong></td>
+<td><strong>Tipo de Leitura</strong></td>
+<td><strong>Tamanho de Leitura</strong></td>
+<td><strong>Taxa de Erro</strong></td>
+<td><strong>Tempo de Execução</strong></td>
+<td><strong>Aplicações Comuns</strong></td>
+</tr>
+<tr class="even">
+<td>Illumina</td>
+<td>Short reads</td>
+<td>150–300 pares de bases</td>
+<td>&lt;1%</td>
+<td>1–2 dias</td>
+<td>RNA-seq, exoma, WGS, genotipagem</td>
+</tr>
+<tr class="odd">
+<td>PacBio Hifi</td>
+<td>Long reads (alta fidelidade)</td>
+<td>10–25 kb (HiFi)</td>
+<td>~1%</td>
+<td>1–2 dias</td>
+<td>Montagem genômica, haplótipos, variantes estruturais</td>
+</tr>
+<tr class="even">
+<td>Oxford Nanopre</td>
+<td>Long/ultralong reads</td>
+<td>10 kb – &gt;1 Mb</td>
+<td>5–10% (melhorando)</td>
+<td>Horas a 2 dias</td>
+<td>Metagenômica, epigenética, transcriptômica, forense</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="introdução-a-tecnologia-de-sequenciamento" class="slide level2">
+<h2>Introdução a tecnologia de sequenciamento</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://www.genome.gov/geneticsglossary/DNASequencing#:~:text=DNA%20sequencing%20refers%20to%20the,use%20to%20develop%20and%20operate."><img data-src="seqmethods.png" class="quarto-figure quarto-figure-center" alt="https://www.genome.gov/geneticsglossary/DNASequencing#:~:text=DNA%20sequencing%20refers%20to%20the,use%20to%20develop%20and%20operate."></a></p>
+</figure>
+</div>
+<figcaption>https://www.genome.gov/geneticsglossary/DNASequencing#:~:text=DNA%20sequencing%20refers%20to%20the,use%20to%20develop%20and%20operate.</figcaption>
+</figure>
+</div>
+</section>
+<section id="oxford-nanopore-technologies-ont" class="slide level2">
+<h2>Oxford nanopore technologies (ONT)</h2>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<p><img data-src="equipaments.png" class="quarto-figure quarto-figure-left"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div style="font-size: 80%;">
+<ul>
+<li><p>Portátil e escalável;</p></li>
+<li><p>“Barato”;</p></li>
+<li><p>Aquisição de dados em tempo real;</p></li>
+<li><p>Altos volumes de dados (fastq &gt; 50 Gb);</p></li>
+<li><p>DNA* e RNA*;</p></li>
+<li><p>Long reads (10 kb – 100 Kb);</p></li>
+<li><p>Ultra (100 Kb – 300 Kb);</p></li>
+<li><p>Recorde 4 Mb!!!!!!;</p></li>
+<li><p>Acurácia atual de &gt;99%;</p></li>
+</ul>
+</div>
+</div></div>
+</div>
+</section>
+<section id="ont---flowcells" class="slide level2">
+<h2>ONT - Flowcells</h2>
+
+<img data-src="flowcells.png" class="r-stretch quarto-figure-center"><p class="caption">Valores teórico de capacidade de sequenciamento.</p></section>
+<section id="ont---princípio" class="slide level2">
+<h2>ONT - Princípio</h2>
+
+<img data-src="ont_principle.png" class="r-stretch quarto-figure-center"><p class="caption"><span class="citation" data-cites="wang2021">(<a href="#/referências" role="doc-biblioref" onclick="">Wang et al. 2021</a>)</span></p></section>
+<section id="ont---princípio-1" class="slide level2">
+<h2>ONT - Princípio</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/RcP85JHLmnI?si=tmBwQYEmgRZa34zA" width="90%" height="80%" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="ont---nanoporos" class="slide level2">
+<h2>ONT - Nanoporos</h2>
+
+<img data-src="napores.png" class="r-stretch quarto-figure-center"><p class="caption">Lu, C., Bonini, A., Viel, J.H.&nbsp;et al.&nbsp;Toward single-molecule protein sequencing using nanopores.&nbsp;Nat Biotechnol&nbsp;43, 312–322 (2025). <span class="citation" data-cites="Lu2025">(<a href="#/referências" role="doc-biblioref" onclick="">Lu et al. 2025</a>)</span></p></section>
+<section id="ont---leitura-da-fita" class="slide level2">
+<h2>ONT - Leitura da fita</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="leituradafita.png"></p>
+<figcaption>Sutton, M.A., Burton, A.S., Zaikova, E. et al.&nbsp;Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div style="font-size: 80%">
+
+</div>
+</div></div>
+</section>
+<section id="ont---leitura-da-fita-1" class="slide level2">
+<h2>ONT - Leitura da fita</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="leituradafita.png"></p>
+<figcaption>Sutton, M.A., Burton, A.S., Zaikova, E. et al.&nbsp;Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div style="font-size: 80%">
+<ul>
+<li><p>Leitura DNA = 400 bp por segundo;</p></li>
+<li><p>RNA = 70 bp por segundo;</p></li>
+<li><p>6 bases simultâneas por poro;</p></li>
+<li><p>{A,T,C,G};</p></li>
+</ul>
+</div>
+</div></div>
+</section>
+<section id="ont---leitura-da-fita-2" class="slide level2">
+<h2>ONT - Leitura da fita</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="leituradafita.png"></p>
+<figcaption>Sutton, M.A., Burton, A.S., Zaikova, E. et al.&nbsp;Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div style="font-size: 80%">
+<ul>
+<li><p>Leitura DNA = 400 bp por segundo;</p></li>
+<li><p>RNA = 70 bp por segundo;</p></li>
+<li><p>6 bases simultâneas por poro;</p></li>
+<li><p>{A,T,C,G};</p></li>
+</ul>
+<p><br></p>
+<ul>
+<li>4x4x4x4x4x4 =?</li>
+</ul>
+</div>
+</div></div>
+</section>
+<section id="ont---leitura-da-fita-3" class="slide level2">
+<h2>ONT - Leitura da fita</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="leituradafita.png"></p>
+<figcaption>Sutton, M.A., Burton, A.S., Zaikova, E. et al.&nbsp;Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div style="font-size: 80%">
+<ul>
+<li><p>Leitura DNA = 400 bp por segundo;</p></li>
+<li><p>RNA = 70 bp por segundo;</p></li>
+<li><p>6 bases simultâneas por poro;</p></li>
+<li><p>{A,T,C,G};</p></li>
+</ul>
+<p><br></p>
+<ul>
+<li>4x4x4x4x4x4 =?</li>
+</ul>
+<p><br></p>
+<ul>
+<li>4096 combinações!</li>
+</ul>
+</div>
+</div></div>
+</section>
+<section id="ont---rna" class="slide level2">
+<h2>ONT - RNA</h2>
+
+<img data-src="rna.png" class="quarto-figure quarto-figure-center r-stretch" width="1300"></section>
+<section id="modificações-no-dna" class="slide level2">
+<h2>Modificações no DNA</h2>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="ont_prinmods.png" width="1000"></p>
+<figcaption>https://www.nature.com/articles/s41587-021-01108-x</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="modificações-no-dna-1" class="slide level2">
+<h2>Modificações no DNA</h2>
+<ul>
+<li>Existem cerca de 30 modificações de base descrita!</li>
+</ul>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>{A, T, C, G, 5mC}</p>
+</div><div class="column" style="width:50%;">
+<p>{A, T, C, G, 5mC, 5hmC}</p>
+</div></div>
+</div>
+</section>
+<section id="modificações-no-dna-2" class="slide level2">
+<h2>Modificações no DNA</h2>
+<ul>
+<li>Existem cerca de 30 modificações de base descrita!</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>{A, T, C, G, 5mC}</p>
+<p><br></p>
+<p>5x5x5x5x5x5 = 15625 combinações!</p>
+</div><div class="column" style="width:50%;">
+<p>{A, T, C, G, 5mC, 5hmC}</p>
+<p><br></p>
+<p>6x6x6x6x6x6 = 46656 combinações!</p>
+</div></div>
+</section>
+<section id="basecallers" class="slide level2">
+<h2>Basecallers</h2>
+</section></section>
+<section id="section-1" class="title-slide slide level1 center">
+<h1></h1>
+
+</section>
+
+<section id="chamada-de-base-basecalling" class="title-slide slide level1 center">
+<h1>Chamada de base (basecalling)</h1>
+
+</section>
+
+<section id="referências" class="title-slide slide level1 smaller scrollable">
 <h1>Referências</h1>
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Lu2025" class="csl-entry" role="listitem">
+Lu, Chunzhe, Andrea Bonini, Jakob H. Viel, e Giovanni Maglia. 2025. <span>“Toward Single-Molecule Protein Sequencing Using Nanopores”</span>. <em>Nature Biotechnology</em> 43 (3): 312–22. <a href="https://doi.org/10.1038/s41587-025-02587-y">https://doi.org/10.1038/s41587-025-02587-y</a>.
+</div>
+<div id="ref-robinson2011" class="csl-entry" role="listitem">
+Robinson, James T, Helga Thorvaldsdóttir, Wendy Winckler, Mitchell Guttman, Eric S Lander, Gad Getz, e Jill P Mesirov. 2011. <span>“Integrative Genomics Viewer”</span>. <em>Nature Biotechnology</em> 29 (1): 24–26. <a href="https://doi.org/10.1038/nbt.1754">https://doi.org/10.1038/nbt.1754</a>.
+</div>
+<div id="ref-wang2021" class="csl-entry" role="listitem">
+Wang, Yunhao, Yue Zhao, Audrey Bollas, Yuru Wang, e Kin Fai Au. 2021. <span>“Nanopore Sequencing Technology, Bioinformatics and Applications”</span>. <em>Nature Biotechnology</em> 39 (11): 1348–65. <a href="https://doi.org/10.1038/s41587-021-01108-x">https://doi.org/10.1038/s41587-021-01108-x</a>.
+</div>
+</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<p>marcel.ferreira@unesp.br</p>
 </div>
 </div></div>
 

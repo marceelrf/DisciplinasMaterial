@@ -1,0 +1,4 @@
+- source: nanopore.qmd
+  quarto-pub:
+    - id: 8819d60b-2670-43e7-aa7e-950f0b7dcd95
+      url: https://marceelrf.quarto.pub/nanopore_genetica

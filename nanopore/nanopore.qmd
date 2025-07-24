@@ -1,5 +1,6 @@
 ---
-title: "Nanopore"
+title: "Sequenciamento de Terceira Geração com Oxford Nanopore"
+subtitle: "Princípios e Aplicações em Bioinformática"
 author: "Marcel Ferreira"
 date: today
 format:
@@ -11,6 +12,7 @@ format:
     page-layout: full
     reference-location: document
     chalkboard: true
+    footer: "marcel.ferreira@unesp.br"
 editor: visual
 lang: pt-BR
 slide-number: c/t
@@ -39,7 +41,7 @@ bibliography: references.bib
 
 <br>
 
--   Desde 2023, pós-doutarado em genética;
+-   Desde 2023, pós-doutorado em genética;
 :::
 :::
 
@@ -73,7 +75,7 @@ Bioinformática
 
 ## Projeto
 
-[![Diversidade](https://isbet.org.br/wp-content/uploads/2024/08/grupo-de-jovens-multirraciais-sorrindo-para-a-camera-conceito-de-amizade-e-diversidade_442523-605.webp){fig-align="center" width="950"}](https://isbet.org.br/diversidade-no-estagio-e-jovem-aprendiz/)
+[![Diversidade: como podemos utilizar DNA para predizer o fenótipo!](https://isbet.org.br/wp-content/uploads/2024/08/grupo-de-jovens-multirraciais-sorrindo-para-a-camera-conceito-de-amizade-e-diversidade_442523-605.webp){fig-align="center" width="780"}](https://isbet.org.br/diversidade-no-estagio-e-jovem-aprendiz/)
 
 ## Não sou da nanopore
 
@@ -111,6 +113,10 @@ Bioinformática
 
 -   Vamos aprofundar sobre aspectos de bioinformática das análises;
 
+<br>
+
+-   Vamos focar em ***genômica*** e ***epigenômica***;
+
 ## Desafios 🚵
 
 -   Bancada..
@@ -119,9 +125,11 @@ Bioinformática
 
 -   Tempo...
 
+-   Programas...
+
 ## Material online
 
--   Esses slides;
+-   [Esses slides](https://marceelrf.quarto.pub/nanopore_genetica);
 
 <br>
 
@@ -131,7 +139,7 @@ Bioinformática
 
 ## Método do ano de 2022
 
-[![Publicado na Nature:](methodoftheyear.png){fig-align="center" width="516"}](https://www.nature.com/articles/s41592-022-01730-w)
+[![Publicado na Nature: ](methodoftheyear.png){fig-align="center" width="516"}](https://www.nature.com/articles/s41592-022-01730-w)
 
 ## Passar os atalhos
 
@@ -154,5 +162,277 @@ Bioinformática
 :::
 
 ## Bioinformática
+
+-   NIH: "*Bioinformatics, as related to genetics and genomics, is a scientific subdiscipline that involves using computer technology to collect, store, analyze and disseminate biological data and information, such as DNA and amino acid sequences or annotations about those sequences.*"
+
+::: aside
+NIH: National Institute of Health
+:::
+
+## Bioinformática
+
+-   NIH: "*Bioinformatics, as related to **genetics** and **genomics**, is a scientific subdiscipline that involves using computer technology to **collect**, **store**, **analyze** and **disseminate** biological data and information, such as **DNA** and **amino acid sequences** or annotations about those sequences.*"
+
+::: aside
+NIH: National Institute of Health
+:::
+
+## Cronograma
+
+## Programas e dados
+
+-   Baixar arquivos do Drive \[link\];
+
+<br>
+
+-   Instalar o IGV [@robinson2011] \[[link](https://igv.org/doc/desktop/)\];
+
+<br>
+
+-   Usar o script de instalação dos programas no Linux;
+
+# Sequenciamento via ONT
+
+## Ordens de Grandeza do Genoma Humano
+
+-   Número de cromossomos: 46 (23 pares);
+
+-   Tamanho do genoma haploide: \~3,2 bilhões de pares de bases (3,2 Gb);
+
+-   Número estimado de genes codificadores de proteínas: \~20.000;
+
+## 
+
+![](humanchr.png){fig-align="center"}
+
+## Por que sequenciar?
+
+. . .
+
+-   A sequência é a "receita" da vida
+
+    -   Ela determina a estrutura e função das moléculas biológicas.
+
+-   **DNA** → **RNA** → **Proteína**
+
+    -   Alterações na sequência podem afetar a função celular e causar doenças.
+
+-   Entender a sequência = entender o funcionamento dos organismos
+
+    -   Do gene à característica observável (fenótipo).
+
+-   Permite identificar diferenças genéticas
+
+    -   Entre indivíduos, espécies, populações ou células (ex: câncer).
+
+## Geração de sequenciamento
+
+[![https://pit.edu.vn/en/post/generations-of-gene-sequencing-technology-139.htm](seqgens.png)](https://pit.edu.vn/en/post/generations-of-gene-sequencing-technology-139.htm)
+
+## Sequenciamento: Comparativo entre Plataformas
+
+<br>
+
+::: {style="font-size:80%;"}
+
+|                |                              |                         |                     |                       |                                                      |
+|-----------|-----------|-----------|-----------|-----------|---------------|
+| **Plataforma** | **Tipo de Leitura**          | **Tamanho de Leitura**  | **Taxa de Erro**    | **Tempo de Execução** | **Aplicações Comuns**                                |
+| Illumina       | Short reads                  | 150--300 pares de bases | \<1%                | 1--2 dias             | RNA-seq, exoma, WGS, genotipagem                     |
+| PacBio Hifi    | Long reads (alta fidelidade) | 10--25 kb (HiFi)        | \~1%                | 1--2 dias             | Montagem genômica, haplótipos, variantes estruturais |
+| Oxford Nanopre | Long/ultralong reads         | 10 kb -- \>1 Mb         | 5--10% (melhorando) | Horas a 2 dias        | Metagenômica, epigenética, transcriptômica, forense  |
+
+:::
+
+## Introdução a tecnologia de sequenciamento
+
+[![https://www.genome.gov/geneticsglossary/DNASequencing#:\~:text=DNA%20sequencing%20refers%20to%20the,use%20to%20develop%20and%20operate.](seqmethods.png){fig-align="center"}](https://www.genome.gov/geneticsglossary/DNASequencing#:~:text=DNA%20sequencing%20refers%20to%20the,use%20to%20develop%20and%20operate.)
+
+## Oxford nanopore technologies (ONT)
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+![](equipaments.png){fig-align="left"}
+:::
+
+::: {.column width="50%"}
+::: {style="font-size: 80%;"}
+-   Portátil e escalável;
+
+-   "Barato";
+
+-   Aquisição de dados em tempo real;
+
+-   Altos volumes de dados (fastq \> 50 Gb);
+
+-   DNA\* e RNA\*;
+
+-   Long reads (10 kb -- 100 Kb);
+
+-   Ultra (100 Kb -- 300 Kb);
+
+-   Recorde 4 Mb!!!!!!;
+
+-   Acurácia atual de \>99%;
+:::
+:::
+:::
+
+## ONT - Flowcells
+
+![Valores teórico de capacidade de sequenciamento.](flowcells.png){fig-align="center"}
+
+## ONT - Princípio
+
+![[@wang2021]](ont_principle.png){fig-align="center"}
+
+## ONT - Princípio
+
+{{< video https://youtu.be/RcP85JHLmnI?si=tmBwQYEmgRZa34zA width="90%" height="80%">}}
+
+## ONT - Nanoporos
+
+![Lu, C., Bonini, A., Viel, J.H. et al. Toward single-molecule protein sequencing using nanopores. Nat Biotechnol 43, 312--322 (2025). [@Lu2025]](napores.png)
+
+## ONT - Leitura da fita
+
+::: columns
+::: {.column width="50%"}
+![Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4](leituradafita.png)
+:::
+
+::: {.column width="50%"}
+::: {style="font-size: 80%"}
+:::
+:::
+:::
+
+## ONT - Leitura da fita
+
+::: columns
+::: {.column width="50%"}
+![Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4](leituradafita.png){alt="Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4"}
+:::
+
+::: {.column width="50%"}
+::: {style="font-size: 80%"}
+-   Leitura DNA = 400 bp por segundo;
+
+-   RNA = 70 bp por segundo;
+
+-   6 bases simultâneas por poro;
+
+-   {A,T,C,G};
+:::
+:::
+:::
+
+## ONT - Leitura da fita
+
+::: columns
+::: {.column width="50%"}
+![Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4](leituradafita.png){alt="Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4"}
+:::
+
+::: {.column width="50%"}
+::: {style="font-size: 80%"}
+-   Leitura DNA = 400 bp por segundo;
+
+-   RNA = 70 bp por segundo;
+
+-   6 bases simultâneas por poro;
+
+-   {A,T,C,G};
+
+<br>
+
+-   4x4x4x4x4x4 =?
+:::
+:::
+:::
+
+## ONT - Leitura da fita
+
+::: columns
+::: {.column width="50%"}
+![Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4](leituradafita.png){alt="Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4"}
+:::
+
+::: {.column width="50%"}
+::: {style="font-size: 80%"}
+-   Leitura DNA = 400 bp por segundo;
+
+-   RNA = 70 bp por segundo;
+
+-   6 bases simultâneas por poro;
+
+-   {A,T,C,G};
+
+<br>
+
+-   4x4x4x4x4x4 =?
+
+<br>
+
+-   4096 combinações!
+:::
+:::
+:::
+
+## ONT - RNA
+
+![](rna.png){fig-align="center" width="1300"}
+
+## Modificações no DNA
+
+. . .
+
+![https://www.nature.com/articles/s41587-021-01108-x](ont_prinmods.png){fig-align="center" width="1000"}
+
+## Modificações no DNA
+
+-   Existem cerca de 30 modificações de base descrita!
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+{A, T, C, G, 5mC}
+:::
+
+::: {.column width="50%"}
+{A, T, C, G, 5mC, 5hmC}
+:::
+:::
+
+## Modificações no DNA
+
+-   Existem cerca de 30 modificações de base descrita!
+
+::: columns
+::: {.column width="50%"}
+{A, T, C, G, 5mC}
+
+<br>
+
+5x5x5x5x5x5 = 15625 combinações!
+:::
+
+::: {.column width="50%"}
+{A, T, C, G, 5mC, 5hmC}
+
+<br>
+
+6x6x6x6x6x6 = 46656 combinações!
+:::
+:::
+
+## Basecallers
+
+# 
+
+# Chamada de base (basecalling)
 
 # Referências
