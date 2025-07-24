@@ -1,0 +1,158 @@
+---
+title: "Nanopore"
+author: "Marcel Ferreira"
+date: today
+format:
+  revealjs:
+    theme: simple
+    transition: fade
+    transition-speed: slow
+    width: 1500
+    page-layout: full
+    reference-location: document
+    chalkboard: true
+editor: visual
+lang: pt-BR
+slide-number: c/t
+bibliography: references.bib
+---
+
+# Sobre mim
+
+## Muito prazer..
+
+::: columns
+::: {.column width="50%"}
+![Olar!](images/marshall.jpg){fig-align="center" width="420"}
+:::
+
+::: {.column width="50%" style="font-size: 80%;"}
+-   Marcel;
+
+<br>
+
+-   Físico médico;
+
+<br>
+
+-   Me e PhD em Biotecnologia;
+
+<br>
+
+-   Desde 2023, pós-doutarado em genética;
+:::
+:::
+
+## Interesses
+
+::: columns
+::: {.column width="50%"}
+![Olar!](images/marshall.jpg){fig-align="center" width="420"}
+:::
+
+::: {.column width="50%" style="font-size: 80%;"}
+-   Métodos alternativos ao uso de animais;
+
+-   Identificão humana via DNA;
+
+-   Biologia do tecido ósseo;
+
+-   Biomateriais;
+
+-   Regeneração tecidual;
+
+-   Ciência aberta;
+
+<br>
+
+::: {#red-highlight style="color: red; font-size: 140%; text-align: center; font-weight: bold;"}
+Bioinformática
+:::
+:::
+:::
+
+## Projeto
+
+[![Diversidade](https://isbet.org.br/wp-content/uploads/2024/08/grupo-de-jovens-multirraciais-sorrindo-para-a-camera-conceito-de-amizade-e-diversidade_442523-605.webp){fig-align="center" width="950"}](https://isbet.org.br/diversidade-no-estagio-e-jovem-aprendiz/)
+
+## Não sou da nanopore
+
+::: {style="text-align: center;"}
+<iframe src="https://giphy.com/embed/zFa3vjySsETPa" width="414" height="480" style frameBorder="0" class="giphy-embed" allowFullScreen>
+
+</iframe>
+
+<p><a href="https://giphy.com/gifs/zFa3vjySsETPa">via GIPHY</a></p>
+:::
+
+# Sobre vocês
+
+## Sobre vocês
+
+::: {style="text-align: center;"}
+<iframe src="https://giphy.com/embed/5wWf7H89PisM6An8UAU" width="960" height="558" style frameBorder="0" class="giphy-embed" allowFullScreen>
+
+</iframe>
+
+<p><a href="https://giphy.com/gifs/editingandlayout-the-office-michael-scott-5wWf7H89PisM6An8UAU">via GIPHY</a></p>
+:::
+
+# Sobre essa disciplina
+
+## Primeira edição (de muitas...🙏)
+
+-   Desde maio estou como colaborador no programa de Genética do IBB;
+
+<br>
+
+-   Infelizmente não terá pratica de bancada;
+
+<br>
+
+-   Vamos aprofundar sobre aspectos de bioinformática das análises;
+
+## Desafios 🚵
+
+-   Bancada..
+
+-   Requisitos computacionais...
+
+-   Tempo...
+
+## Material online
+
+-   Esses slides;
+
+<br>
+
+-   [Livro de códigos](https://marceelrf-material.netlify.app/nanopore.html);
+
+## Fruto do meu projeto
+
+## Método do ano de 2022
+
+[![Publicado na Nature:](methodoftheyear.png){fig-align="center" width="516"}](https://www.nature.com/articles/s41592-022-01730-w)
+
+## Passar os atalhos
+
+::: columns
+::: {.column width="50%"}
+<iframe src="https://giphy.com/embed/1n833bZxdzKzaErLe9" width="480" height="269" style frameBorder="0" class="giphy-embed" allowFullScreen>
+
+</iframe>
+
+<p><a href="https://giphy.com/gifs/nba-expression-derrick-white-1n833bZxdzKzaErLe9">via GIPHY</a></p>
+:::
+
+::: {.column width="50%"}
+<iframe src="https://giphy.com/embed/Cas0va26zqBvTO5vY9" width="480" height="480" style frameBorder="0" class="giphy-embed" allowFullScreen>
+
+</iframe>
+
+<p><a href="https://giphy.com/gifs/pudgypenguins-rage-enough-ragequit-Cas0va26zqBvTO5vY9">via GIPHY</a></p>
+:::
+:::
+
+## Bioinformática
+
+# Referências
