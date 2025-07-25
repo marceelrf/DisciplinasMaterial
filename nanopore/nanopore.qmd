@@ -504,7 +504,7 @@ MinKWON é o software que controla o sequenciamento.
 ## ONT - Leitura da fita
 
 ::: center
-[![Modelos de poros tem dois centros de leitura.](https://a.storyblok.com/f/196663/5384x5511/5d1ab2a959/different-types-of-nanopore.png)](https://nanoporetech.com/platform/technology/basecalling)
+[![Modelos de poros tem dois centros de leitura.](https://a.storyblok.com/f/196663/5384x5511/5d1ab2a959/different-types-of-nanopore.png){width="488"}](https://nanoporetech.com/platform/technology/basecalling)
 :::
 
 ## ONT - RNA
@@ -579,11 +579,11 @@ POD5 é o formato atual, mas pode-se encontrar FAST5;
 
 ## Basecallers
 
-[![Como funcionam](https://a.storyblok.com/f/196663/809x716/e4743867e2/neural-networks.png){fig-align="center"}](https://nanoporetech.com/platform/technology/basecalling)
+[![Como funcionam](https://a.storyblok.com/f/196663/809x716/e4743867e2/neural-networks.png){fig-align="center" width="565"}](https://nanoporetech.com/platform/technology/basecalling)
 
 ## Basecallers
 
-[![Evolução dos modelos.](https://a.storyblok.com/f/196663/2326x960/ae453e7f75/basecallers-timeline.png){fig-align="center"}](https://nanoporetech.com/platform/technology/basecalling)
+[![Evolução dos modelos.](https://a.storyblok.com/f/196663/2326x960/ae453e7f75/basecallers-timeline.png){fig-align="center" width="1200"}](https://nanoporetech.com/platform/technology/basecalling)
 
 ## Basecallers
 
@@ -649,6 +649,10 @@ Sugestão de leitura:
 
 ![Determinar haplótipos longos](longhap.png){fig-align="center" width="1200"}
 
+## Potencial - haplótipos longos
+
+[![Haplótipos do pai e da mãe.](pecat.webp){fig-align="center" width="797"}](https://www.nature.com/articles/s41467-024-47349-7/figures/4)
+
 ## Potencial - metilação
 
 ![Metilação ao longo do gene MYEF2.](hapmet.png){fig-align="center" width="500"}
@@ -676,6 +680,10 @@ Sugestão de leitura:
 ## Futuro da tecnologia
 
 [![Lu, C., Bonini, A., Viel, J.H. et al. Toward single-molecule protein sequencing using nanopores. Nat Biotechnol 43, 312--322 (2025). https://doi.org/10.1038/s41587-025-02587-y](protein.png){fig-align="center"}](https://www.nature.com/articles/s41587-025-02587-y#citeas)
+
+## Futuro da tecnologia
+
+[![https://comics.dcv.fct.unl.pt/resources/](multiomics.png){fig-align="center"}](https://comics.dcv.fct.unl.pt/resources/)
 
 ## Desafios (e frustrações)..
 
