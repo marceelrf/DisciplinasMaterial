@@ -75,7 +75,7 @@ Bioinformática
 
 ## Projeto
 
-[![Diversidade: como podemos utilizar DNA para predizer o fenótipo!](https://isbet.org.br/wp-content/uploads/2024/08/grupo-de-jovens-multirraciais-sorrindo-para-a-camera-conceito-de-amizade-e-diversidade_442523-605.webp){fig-align="center" width="780"}](https://isbet.org.br/diversidade-no-estagio-e-jovem-aprendiz/)
+[![Diversidade: como podemos utilizar DNA para predizer o fenótipo?](https://isbet.org.br/wp-content/uploads/2024/08/grupo-de-jovens-multirraciais-sorrindo-para-a-camera-conceito-de-amizade-e-diversidade_442523-605.webp){fig-align="center" width="780"}](https://isbet.org.br/diversidade-no-estagio-e-jovem-aprendiz/)
 
 ## Não sou da nanopore
 
@@ -137,9 +137,11 @@ Bioinformática
 
 ## Fruto do meu projeto
 
+[![Workshop realizado em 2023 e 2024.](images/Slide2.PNG){fig-align="center" width="462"}](https://workshopbioinfoforense.netlify.app/)
+
 ## Método do ano de 2022
 
-[![Publicado na Nature: ](methodoftheyear.png){fig-align="center" width="516"}](https://www.nature.com/articles/s41592-022-01730-w)
+[![Publicado na Nature:](methodoftheyear.png){fig-align="center" width="516"}](https://www.nature.com/articles/s41592-022-01730-w)
 
 ## Passar os atalhos
 
@@ -177,7 +179,113 @@ NIH: National Institute of Health
 NIH: National Institute of Health
 :::
 
+## Bioinformática
+
+-   Não vamos focar nos algoritmos;
+
+<br>
+
+-   Mas sim nos dados produzidos e como analisa-los;
+
 ## Cronograma
+
+::: columns
+::: {.column width="50%" style="font-size: 75%;"}
+-   Dia 1 - Manhã:
+
+    -   Apresentação;
+
+    -   Sequenciamento nanopore;
+
+    -   Instalação dos softwares;
+
+<br>
+
+-   Dia 1 - Tarde:
+
+    -   Chamada de base;
+
+    -   Prática;
+
+<br>
+:::
+
+::: {.column width="50%" style="font-size: 75%;"}
+-   Dia 2 - Manhã:
+
+    -   Mapeamento de sequências;
+
+    -   Prática;
+
+<br>
+
+-   Dia 2 - Tarde:
+
+    -   Chamada de variantes;
+
+    -   Prática;
+:::
+:::
+
+## Cronograma
+
+::: columns
+::: {.column width="50%" style="font-size: 75%;"}
+-   Dia 3 - Manhã:
+
+    -   Variantes estruturais;
+
+    -   Prática;
+
+<br>
+
+-   Dia 3 - Tarde:
+
+    -   Determinação de haplótipos;
+
+    -   Prática;
+
+<br>
+:::
+
+::: {.column width="50%" style="font-size: 75%;"}
+-   Dia 4 - Manhã:
+
+    -   Montagem de genomas;
+
+    -   Prática;
+
+<br>
+
+-   Dia 4 - Tarde:
+
+    -   Modificação de bases;
+
+    -   Prática;
+
+        <br>
+
+    -   Adeus 😥.
+:::
+:::
+
+## Avaliação {auto-animate="true"}
+
+-   3 provas;
+-   2 seminários;
+-   Estudo dirigido;
+
+------------------------------------------------------------------------
+
+## Avaliação {auto-animate="true"}
+
+-   ~~3 provas;~~
+-   ~~2 seminários;~~
+-   ~~Estudo dirigido;~~
+
+<br>
+
+-   Participação na disciplina e fazer as atividades.
 
 ## Programas e dados
 
@@ -234,14 +342,12 @@ NIH: National Institute of Health
 <br>
 
 ::: {style="font-size:80%;"}
-
 |                |                              |                         |                     |                       |                                                      |
-|-----------|-----------|-----------|-----------|-----------|---------------|
+|------------|------------|------------|------------|------------|------------|
 | **Plataforma** | **Tipo de Leitura**          | **Tamanho de Leitura**  | **Taxa de Erro**    | **Tempo de Execução** | **Aplicações Comuns**                                |
 | Illumina       | Short reads                  | 150--300 pares de bases | \<1%                | 1--2 dias             | RNA-seq, exoma, WGS, genotipagem                     |
 | PacBio Hifi    | Long reads (alta fidelidade) | 10--25 kb (HiFi)        | \~1%                | 1--2 dias             | Montagem genômica, haplótipos, variantes estruturais |
 | Oxford Nanopre | Long/ultralong reads         | 10 kb -- \>1 Mb         | 5--10% (melhorando) | Horas a 2 dias        | Metagenômica, epigenética, transcriptômica, forense  |
-
 :::
 
 ## Introdução a tecnologia de sequenciamento
@@ -296,6 +402,20 @@ NIH: National Institute of Health
 
 ![Lu, C., Bonini, A., Viel, J.H. et al. Toward single-molecule protein sequencing using nanopores. Nat Biotechnol 43, 312--322 (2025). [@Lu2025]](napores.png)
 
+## ONT - Tipos de leitura
+
+[![Duplex.](duplex.webp){fig-align="center" width="900"}](https://nanoporetech.com/document/kit-14-device-and-informatics)
+
+## ONT - Tipos de leitura
+
+-   `Simplex`: O sequenciamento de uma única fita. A fita de DNA modelo passa pelo nanoporo e é submetida ao basecalling. Isso é realizado no MinKNOW.
+
+-   `Duplex`: O sequenciamento de ambas as fitas. A fita complementar é lida imediatamente após a fita modelo e o basecalling consensual para ambas as fitas leva a um aumento ainda maior na precisão. Isso é realizado no Dorado.
+
+::: aside
+MinKWON é o software que controla o sequenciamento.
+:::
+
 ## ONT - Leitura da fita
 
 ::: columns
@@ -313,7 +433,7 @@ NIH: National Institute of Health
 
 ::: columns
 ::: {.column width="50%"}
-![Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4](leituradafita.png){alt="Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4"}
+![Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4](leituradafita.png)
 :::
 
 ::: {.column width="50%"}
@@ -333,7 +453,7 @@ NIH: National Institute of Health
 
 ::: columns
 ::: {.column width="50%"}
-![Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4](leituradafita.png){alt="Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4"}
+![Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4](leituradafita.png)
 :::
 
 ::: {.column width="50%"}
@@ -357,7 +477,7 @@ NIH: National Institute of Health
 
 ::: columns
 ::: {.column width="50%"}
-![Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4](leituradafita.png){alt="Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4"}
+![Sutton, M.A., Burton, A.S., Zaikova, E. et al. Radiation Tolerance of Nanopore Sequencing Technology for Life Detection on Mars and Europa. Sci Rep 9, 5370 (2019). https://doi.org/10.1038/s41598-019-41488-4](leituradafita.png)
 :::
 
 ::: {.column width="50%"}
@@ -381,6 +501,12 @@ NIH: National Institute of Health
 :::
 :::
 
+## ONT - Leitura da fita
+
+::: center
+[![Modelos de poros tem dois centros de leitura.](https://a.storyblok.com/f/196663/5384x5511/5d1ab2a959/different-types-of-nanopore.png)](https://nanoporetech.com/platform/technology/basecalling)
+:::
+
 ## ONT - RNA
 
 ![](rna.png){fig-align="center" width="1300"}
@@ -389,7 +515,7 @@ NIH: National Institute of Health
 
 . . .
 
-![https://www.nature.com/articles/s41587-021-01108-x](ont_prinmods.png){fig-align="center" width="1000"}
+![https://www.nature.com/articles/s41587-021-01108-x](ont_prinmods.png){fig-align="center" width="529"}
 
 ## Modificações no DNA
 
@@ -431,8 +557,206 @@ NIH: National Institute of Health
 
 ## Basecallers
 
-# 
+![Basecalling.](images/ont_geral.png){fig-align="center" width="1200"}
+
+## Basecallers
+
+-   Nanoporos diferentes contêm "leitores" diferentes;
+
+    -   R10.4.1 é o modelo atual;
+
+-   Capturam o sinal elétrico (POD5);
+
+-   Basecallers transformam POD5 em FASTQ;
+
+-   Utilizam Machine Learning (RNN);
+
+-   Este processo pode ser feito em tempo real;
+
+::: aside
+POD5 é o formato atual, mas pode-se encontrar FAST5;
+:::
+
+## Basecallers
+
+[![Como funcionam](https://a.storyblok.com/f/196663/809x716/e4743867e2/neural-networks.png){fig-align="center"}](https://nanoporetech.com/platform/technology/basecalling)
+
+## Basecallers
+
+[![Evolução dos modelos.](https://a.storyblok.com/f/196663/2326x960/ae453e7f75/basecallers-timeline.png){fig-align="center"}](https://nanoporetech.com/platform/technology/basecalling)
+
+## Basecallers
+
+Sugestão de leitura:
+
+-   *"**From squiggle to basepair: computational approaches for improving nanopore sequencing read accuracy**"* [@rang2018]\[[link](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1462-9)\]
+
+## Bancada
+
+. . .
+
+-   hmwDNA;
+
+. . .
+
+-   Alta pureza;
+
+. . .
+
+-   Não há necessidade de PCR;
+
+. . .
+
+-   Não há necessidade conversões por bissulfito de sódio (e afins);
+
+## Enriquecimento do sequenciamento
+
+. . .
+
+-   ***Target***;
+
+. . .
+
+-   ***CRISPR***;
+
+. . .
+
+-   ***Adaptive sampling***;
+
+## Enriquecimento do sequenciamento
+
+[![Estratégias de enriquecimento de ONT](images/enrichment3.png){fig-align="center"}](https://www.sciencedirect.com/science/article/pii/S1872497324001522)
+
+## Potencial
+
+## Potencial - montagem de genomas
+
+![https://www.phgfoundation.org/briefing/clinical-long-read-sequencing](montagemdegenomas.png){fig-align="center" width="1000"}
+
+## Potencial - montagem de genomas
+
+[![Montagem completa do genoma humano.](completehumangenome.png){fig-align="center" width="596"}](https://www.science.org/doi/10.1126/science.abj6987)
+
+::: aside
+[@nurk2022]
+:::
+
+## Potencial - montagem de genomas
+
+[![Aumento de bases no genoma.](completehumangenome_2.png){fig-align="center" width="393"}](https://www.science.org/cms/10.1126/science.abj6987/asset/ec796ff1-289e-43cf-a065-ec6573199a8d/assets/images/large/science.abj6987-f1.jpg)
+
+## Potencial - haplótipos longos
+
+![Determinar haplótipos longos](longhap.png){fig-align="center" width="1200"}
+
+## Potencial - metilação
+
+![Metilação ao longo do gene MYEF2.](hapmet.png){fig-align="center" width="500"}
+
+## Potencial - outros
+
+-   STR [@luo2024];
+
+<br>
+
+-   Elementos transponíveis [@smits2022];
+
+<br>
+
+-   Epitranscriptômica [@Workman2019; @Begik2022; @Jain2022];
+
+## Estado atual
+
+[![Sequenciamento de DNA](https://a.storyblok.com/f/196663/10800x3600/86aa012b7e/20250613_dna_q-1.png){fig-align="center" width="1200"}](https://nanoporetech.com/platform/accuracy)
+
+## Estado atual
+
+[![Metilação.](https://a.storyblok.com/f/196663/1158x952/4cc71d5637/base-modification-section-graph_mod.jpg){fig-align="center" width="608"}](https://nanoporetech.com/platform/accuracy)
+
+## Futuro da tecnologia
+
+[![Lu, C., Bonini, A., Viel, J.H. et al. Toward single-molecule protein sequencing using nanopores. Nat Biotechnol 43, 312--322 (2025). https://doi.org/10.1038/s41587-025-02587-y](protein.png){fig-align="center"}](https://www.nature.com/articles/s41587-025-02587-y#citeas)
+
+## Desafios (e frustrações)..
+
+::: {style="text-align: center;"}
+<iframe src="https://giphy.com/embed/2zdVnqmhSfAvyQhzHj" width="480" height="480" style frameBorder="0" class="giphy-embed" allowFullScreen>
+
+</iframe>
+
+<p><a href="https://giphy.com/gifs/showtime-season-4-episode-2zdVnqmhSfAvyQhzHj">via GIPHY</a></p>
+:::
+
+## Desafios (e frustrações)..
+
+::: columns
+::: {.column width="50%"}
+[![Ryan Wick](https://avatars.githubusercontent.com/u/7053555?v=4){width="418"}](https://github.com/rrwick)
+:::
+
+::: {.column width="50%"}
+::: {style="font-size: 90%"}
+***"May 2025 update***
+
+*I've recently heard that ONT is deprecating duplex basecalling -- not surprising given their recent silence on the topic. This is now the third time (after 2D and 1D^2^) that ONT has tried and dropped both-strand basecalling! So it seems that mixed simplex-duplex read sets like the ones in this post will end up a historical curiosity rather than a standard part of ONT sequencing."* \[[link](https://rrwick.github.io/2024/05/08/duplex_assemblies.html)\]
+:::
+:::
+:::
+
+## Visão sobre a tecnologia
+
+## Visão sobre a tecnologia {background-image="genildo.png" background-opacity=".25"}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+::: {style="color: black; font-size: 140%; font-weight: bold; text-shadow: 2px 2px 4px black;"}
+<br>
+
+-   Alterações constantes;
+
+-   Precisa sempre adaptar;
+
+-   Muitas opções de pipeline;
+
+-   Diagnóstico 👎;
+:::
+:::
+
+::: {.column width="50%"}
+::: {style="color: black; font-size: 140%; font-weight: bold; text-shadow: 2px 2px 4px black;"}
+<br>
+
+-   Melhorias constantes;
+
+-   Somos pesquisadores;
+
+-   Versátil;
+
+-   Pesquisa 👍;
+:::
+:::
+:::
+
+# Dados para essa disciplina
+
+## Amostras
+
+## Genes
 
 # Chamada de base (basecalling)
+
+# Mapeamento de sequências
+
+# Chamada de variantes
+
+# Variantes estruturais
+
+# Determinação de haplótipos
+
+# Montagem de genomas
+
+# Modificação de bases
 
 # Referências
