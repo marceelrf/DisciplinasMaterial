@@ -515,7 +515,7 @@ MinKWON é o software que controla o sequenciamento.
 
 . . .
 
-![https://www.nature.com/articles/s41587-021-01108-x](ont_prinmods.png){fig-align="center" width="529"}
+![https://www.nature.com/articles/s41587-021-01108-x](ont_prinmods.png){fig-align="center" width="806"}
 
 ## Modificações no DNA
 
@@ -625,7 +625,7 @@ Sugestão de leitura:
 
 ## Enriquecimento do sequenciamento
 
-[![Estratégias de enriquecimento de ONT](images/enrichment3.png){fig-align="center"}](https://www.sciencedirect.com/science/article/pii/S1872497324001522)
+[![Estratégias de enriquecimento de ONT](images/enrichment3.png){fig-align="center" width="1200"}](https://www.sciencedirect.com/science/article/pii/S1872497324001522)
 
 ## Potencial
 
