@@ -751,7 +751,82 @@ Sugestão de leitura:
 
 ## Amostras
 
+-   As amostras deste disciplinas são referentes ao projeto 1000 genomas [@gustafson2024]. \[[link](https://s3.amazonaws.com/1000g-ont/index.html?prefix=ALIGNMENT_AND_ASSEMBLY_DATA/100_PLUS/IN-HOUSE_MINIMAP2/)\]
+
+-   Os códigos das amostras são:
+
+    -   [HG00109](https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG00109);
+
+    -   [HG00463](https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG00463&Product=DNA);
+
+    -   [HG00663](https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG00663&Product=CC);
+
+    -   [HG01063](https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG01063&PgId=166);
+
+    -   [HG01303](https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG01303&Product=CC);
+
+    -   [HG01524](https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG01524);
+
 ## Genes
+
+```{r}
+#| echo: false
+
+library(gt)
+
+readr::read_tsv(file = here::here("nanopore/genes_disciplina.bed"),
+                col_names = c("chr","start","end","gene","strand")) |>
+  dplyr::mutate(strand = ifelse(strand == 1,yes = "+", no = "-")) |>
+  dplyr::arrange(chr, start) |>
+  gt() |>
+  tab_options(
+    table.font.size = px(30),
+    data_row.padding = px(12),
+    table.width = pct(80)
+  ) |>
+  cols_align(
+    align = "center",
+    columns = everything()  # substitua pelos nomes reais das colunas
+  )
+```
+
+## Programas
+
+::: columns
+::: {.column width="50%"}
+-   Linux;
+
+<br>
+
+-   Usuários windows podem usar WSL;
+
+<br>
+
+-   Script para instalação;
+:::
+
+::: {.column width="50%"}
+[![Conda](https://raw.githubusercontent.com/devicons/devicon/54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08/icons/anaconda/anaconda-original-wordmark.svg){fig-align="center" width="350"}](https://anaconda.org/anaconda/conda)
+:::
+:::
+
+## O que é Conda?
+
+::: {style="text-align: center;"}
+<iframe src="https://giphy.com/embed/WdC26ECYnvTX4Mp2fI" width="480" height="480" style frameBorder="0" class="giphy-embed" allowFullScreen>
+
+</iframe>
+
+<p><a href="https://giphy.com/gifs/primevideo-lularich-WdC26ECYnvTX4Mp2fI">via GIPHY</a></p>
+:::
+
+## Conda
+
+-   Gerenciador de pacotes/programas;
+
+<br>
+
+-   Cria ambiente reprodutíveis;
 
 # Chamada de base (basecalling)
 

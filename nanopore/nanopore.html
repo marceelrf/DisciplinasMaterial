@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.39">
 
   <meta name="author" content="Marcel Ferreira">
-  <meta name="dcterms.date" content="2025-07-25">
+  <meta name="dcterms.date" content="2025-07-28">
   <title>Sequenciamento de Terceira Geração com Oxford Nanopore</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -161,7 +161,7 @@ Marcel Ferreira
 </div>
 </div>
 
-  <p class="date">2025-07-25</p>
+  <p class="date">2025-07-28</p>
 </section>
 <section>
 <section id="sobre-mim" class="title-slide slide level1 center">
@@ -538,14 +538,14 @@ Marcel Ferreira
 <h2>Sequenciamento: Comparativo entre Plataformas</h2>
 <p><br></p>
 <div style="font-size:80%;">
-<table class="caption-top" style="width:100%;">
+<table class="caption-top">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
+<col style="width: 9%">
+<col style="width: 17%">
+<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 31%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -1104,9 +1104,573 @@ Marcel Ferreira
 </section>
 <section id="amostras" class="slide level2">
 <h2>Amostras</h2>
+<ul>
+<li><p>As amostras deste disciplinas são referentes ao projeto 1000 genomas <span class="citation" data-cites="gustafson2024">(<a href="#/referências" role="doc-biblioref" onclick="">Gustafson et al. 2024</a>)</span>. [<a href="https://s3.amazonaws.com/1000g-ont/index.html?prefix=ALIGNMENT_AND_ASSEMBLY_DATA/100_PLUS/IN-HOUSE_MINIMAP2/">link</a>]</p></li>
+<li><p>Os códigos das amostras são:</p>
+<ul>
+<li><p><a href="https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG00109">HG00109</a>;</p></li>
+<li><p><a href="https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG00463&amp;Product=DNA">HG00463</a>;</p></li>
+<li><p><a href="https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG00663&amp;Product=CC">HG00663</a>;</p></li>
+<li><p><a href="https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG01063&amp;PgId=166">HG01063</a>;</p></li>
+<li><p><a href="https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG01303&amp;Product=CC">HG01303</a>;</p></li>
+<li><p><a href="https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=HG01524">HG01524</a>;</p></li>
+</ul></li>
+</ul>
 </section>
 <section id="genes" class="slide level2">
 <h2>Genes</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="mgmiaqeawn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mgmiaqeawn table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mgmiaqeawn thead, #mgmiaqeawn tbody, #mgmiaqeawn tfoot, #mgmiaqeawn tr, #mgmiaqeawn td, #mgmiaqeawn th {
+  border-style: none;
+}
+
+#mgmiaqeawn p {
+  margin: 0;
+  padding: 0;
+}
+
+#mgmiaqeawn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 80%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mgmiaqeawn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mgmiaqeawn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mgmiaqeawn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mgmiaqeawn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mgmiaqeawn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mgmiaqeawn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mgmiaqeawn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mgmiaqeawn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mgmiaqeawn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mgmiaqeawn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mgmiaqeawn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mgmiaqeawn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mgmiaqeawn .gt_row {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mgmiaqeawn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mgmiaqeawn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mgmiaqeawn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mgmiaqeawn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mgmiaqeawn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mgmiaqeawn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mgmiaqeawn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mgmiaqeawn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mgmiaqeawn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mgmiaqeawn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mgmiaqeawn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mgmiaqeawn .gt_left {
+  text-align: left;
+}
+
+#mgmiaqeawn .gt_center {
+  text-align: center;
+}
+
+#mgmiaqeawn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mgmiaqeawn .gt_font_normal {
+  font-weight: normal;
+}
+
+#mgmiaqeawn .gt_font_bold {
+  font-weight: bold;
+}
+
+#mgmiaqeawn .gt_font_italic {
+  font-style: italic;
+}
+
+#mgmiaqeawn .gt_super {
+  font-size: 65%;
+}
+
+#mgmiaqeawn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mgmiaqeawn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mgmiaqeawn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mgmiaqeawn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mgmiaqeawn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mgmiaqeawn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mgmiaqeawn .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="chr" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">chr</th>
+<th id="start" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">start</th>
+<th id="end" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">end</th>
+<th id="gene" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">gene</th>
+<th id="strand" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">strand</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="chr">chr1</td>
+<td class="gt_row gt_center" headers="start">1434861</td>
+<td class="gt_row gt_center" headers="end">1442882</td>
+<td class="gt_row gt_center" headers="gene">VWA1</td>
+<td class="gt_row gt_center" headers="strand">+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="chr">chr15</td>
+<td class="gt_row gt_center" headers="start">27754875</td>
+<td class="gt_row gt_center" headers="end">28099315</td>
+<td class="gt_row gt_center" headers="gene">OCA2</td>
+<td class="gt_row gt_center" headers="strand">-</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="chr">chr15</td>
+<td class="gt_row gt_center" headers="start">98648539</td>
+<td class="gt_row gt_center" headers="end">98964530</td>
+<td class="gt_row gt_center" headers="gene">IGF1R</td>
+<td class="gt_row gt_center" headers="strand">+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="chr">chr16</td>
+<td class="gt_row gt_center" headers="start">68737292</td>
+<td class="gt_row gt_center" headers="end">68835537</td>
+<td class="gt_row gt_center" headers="gene">CDH1</td>
+<td class="gt_row gt_center" headers="strand">+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="chr">chr17</td>
+<td class="gt_row gt_center" headers="start">7661779</td>
+<td class="gt_row gt_center" headers="end">7687546</td>
+<td class="gt_row gt_center" headers="gene">TP53</td>
+<td class="gt_row gt_center" headers="strand">-</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="chr">chr22</td>
+<td class="gt_row gt_center" headers="start">45920366</td>
+<td class="gt_row gt_center" headers="end">45977162</td>
+<td class="gt_row gt_center" headers="gene">WNT7B</td>
+<td class="gt_row gt_center" headers="strand">-</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="chr">chr6</td>
+<td class="gt_row gt_center" headers="start">45328157</td>
+<td class="gt_row gt_center" headers="end">45664349</td>
+<td class="gt_row gt_center" headers="gene">RUNX2</td>
+<td class="gt_row gt_center" headers="strand">+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="chr">chr7</td>
+<td class="gt_row gt_center" headers="start">27153716</td>
+<td class="gt_row gt_center" headers="end">27157936</td>
+<td class="gt_row gt_center" headers="gene">HOXA7</td>
+<td class="gt_row gt_center" headers="strand">-</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="programas" class="slide level2">
+<h2>Programas</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Linux;</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Usuários windows podem usar WSL;</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Script para instalação;</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://anaconda.org/anaconda/conda"><img data-src="https://raw.githubusercontent.com/devicons/devicon/54cfe13ac10eaa1ef817a343ab0a9437eb3c2e08/icons/anaconda/anaconda-original-wordmark.svg" class="quarto-figure quarto-figure-center" width="350" alt="Conda"></a></p>
+</figure>
+</div>
+<figcaption>Conda</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="o-que-é-conda" class="slide level2">
+<h2>O que é Conda?</h2>
+<iframe src="https://giphy.com/embed/WdC26ECYnvTX4Mp2fI" width="480" height="480" style="" frameborder="0" class="giphy-embed" allowfullscreen="">
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/primevideo-lularich-WdC26ECYnvTX4Mp2fI">via GIPHY</a>
+</p>
 </section></section>
 <section id="chamada-de-base-basecalling" class="title-slide slide level1 center">
 <h1>Chamada de base (basecalling)</h1>
@@ -1149,6 +1713,9 @@ Marcel Ferreira
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Begik2022" class="csl-entry" role="listitem">
 Begik, Oguzhan, John S. Mattick, e Eva Maria Novoa. 2022. <span>“Exploring the Epitranscriptome by Native RNA Sequencing”</span>. <em>RNA</em> 28 (11): 1430–39. <a href="https://doi.org/10.1261/rna.079404.122">https://doi.org/10.1261/rna.079404.122</a>.
+</div>
+<div id="ref-gustafson2024" class="csl-entry" role="listitem">
+Gustafson, Jonas A., Sophia B. Gibson, Nikhita Damaraju, Miranda P. G. Zalusky, Kendra Hoekzema, David Twesigomwe, Lei Yang, et al. 2024. <span>“High-Coverage Nanopore Sequencing of Samples from the 1000 Genomes Project to Build a Comprehensive Catalog of Human Genetic Variation”</span>. <em>Genome Research</em> 34 (11): 2061–73. <a href="https://doi.org/10.1101/gr.279273.124">https://doi.org/10.1101/gr.279273.124</a>.
 </div>
 <div id="ref-Jain2022" class="csl-entry" role="listitem">
 Jain, Miten, Robin Abu-Shumays, Hugh E. Olsen, e Mark Akeson. 2022. <span>“Advances in Nanopore Direct RNA Sequencing”</span>. <em>Nature Methods</em> 19 (10): 1160–64. <a href="https://doi.org/10.1038/s41592-022-01633-w">https://doi.org/10.1038/s41592-022-01633-w</a>.
@@ -1396,6 +1963,82 @@ Workman, Rachael E., Alison D. Tang, Paul S. Tang, Miten Jain, John R. Tyson, Ro
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
