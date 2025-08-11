@@ -17,6 +17,7 @@ editor: visual
 lang: pt-BR
 slide-number: c/t
 bibliography: references.bib
+engine: knitr
 ---
 
 # Sobre mim
@@ -830,9 +831,49 @@ readr::read_tsv(file = here::here("nanopore/genes_disciplina.bed"),
 
 # Chamada de base (basecalling)
 
+## Comando `dorado`
+
+## Controle de qualidade (QC)
+
+## NanoPlot
+
+```{bash eval=FALSE, echo=TRUE}
+NanoPlot -t {threads} {--fastq/--bam} {files} -o {OUTPUT_DIR_NAME}
+```
+
+## Chopper
+
+```{bash eval=FALSE, echo=TRUE}
+chopper -q 20 -l 1000 reads.fastq > trimmed_reads.fastq 
+```
+
 # Mapeamento de sequências
 
+## Comando `minimap2`
+
+```{bash eval=FALSE, echo=TRUE}
+minimap2 -ax map-ont -Y -t {THREADS} -R {RG} {REF} {fastq} -o {sam}
+```
+
+-   `THREADS` = Número de threads;
+
+-    `RG` = Tag de registro da amostra;
+
+-   `REF` = Genoma de referência indexado.
+
+-   `fastq` = Arquivo das sequencias;
+
+-   `sam` = Arquivo do alinhamento no formato SAM;
+
 # Chamada de variantes
+
+## Comando `freebayes`
+
+```{bash eval=FALSE, echo=TRUE}
+freebayes -f {REF} -L {BAM_LIST} -t {REGIONS.BED} > var.vcf
+```
+
+## Comando `clair3`
 
 # Variantes estruturais
 
