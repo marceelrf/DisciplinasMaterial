@@ -831,6 +831,32 @@ readr::read_tsv(file = here::here("nanopore/genes_disciplina.bed"),
 
 # Chamada de base (basecalling)
 
+## Chamada de base
+
+-   Procedimento no qual o sinal elétrico (`.pod5`) é convertido em bases (`.fastq` \| `.bam`);
+
+-   Momento crucial onde se define o perfil da análise que será realizada;
+
+-   Erros aqui prejudicam todas as demais análises;
+
+-   `Dorado`;
+
+## Qual modelo usar?
+
+```{bash eval=FALSE, echo=TRUE}
+{analyte}_{pore}_{chemistry}_{speed}@version
+```
+
+-   `analyte`: DNA ou RNA?
+
+-   `pore`: Qual técnologia de poro? (`R10.4.1`/`R9.4.1`)
+
+-   `chemistry`: Qual kit foi utilizado foi utilizado?
+
+-   `speed`: Velocidade de leitura durante o sequenciamento (DNA 400bps)
+
+-   `version`: Versão do modelo
+
 ## Comando `dorado`
 
 ## Controle de qualidade (QC)
@@ -857,7 +883,7 @@ minimap2 -ax map-ont -Y -t {THREADS} -R {RG} {REF} {fastq} -o {sam}
 
 -   `THREADS` = Número de threads;
 
--    `RG` = Tag de registro da amostra;
+-   `RG` = Tag de registro da amostra;
 
 -   `REF` = Genoma de referência indexado.
 
