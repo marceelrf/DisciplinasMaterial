@@ -414,7 +414,7 @@ NIH: National Institute of Health
 -   `Duplex`: O sequenciamento de ambas as fitas. A fita complementar é lida imediatamente após a fita modelo e o basecalling consensual para ambas as fitas leva a um aumento ainda maior na precisão. Isso é realizado no Dorado.
 
 ::: aside
-MinKWON é o software que controla o sequenciamento.
+MinKNOW é o software que controla o sequenciamento.
 :::
 
 ## ONT - Leitura da fita
@@ -673,6 +673,10 @@ Sugestão de leitura:
 ## Estado atual
 
 [![Sequenciamento de DNA](https://a.storyblok.com/f/196663/10800x3600/86aa012b7e/20250613_dna_q-1.png){fig-align="center" width="1200"}](https://nanoporetech.com/platform/accuracy)
+
+$$
+P = 10^{\frac{-Q}{10}}
+$$
 
 ## Estado atual
 
