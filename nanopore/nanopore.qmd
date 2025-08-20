@@ -682,6 +682,22 @@ $$
 
 [![Metilação.](https://a.storyblok.com/f/196663/1158x952/4cc71d5637/base-modification-section-graph_mod.jpg){fig-align="center" width="608"}](https://nanoporetech.com/platform/accuracy)
 
+## EPI2ME
+
+::: columns
+::: {.column width="50%"}
+-   [EPI2ME](https://epi2me.nanoporetech.com/wfindex/) é uma coleção de pipelines fornecidos pela própria ONT;
+
+-   Nextflow;
+
+-   Útil para quem quer ou não programar;
+:::
+
+::: {.column width="50%"}
+[![](https://epi2me.nanoporetech.com/static/dbb47454a74ffdac6ab079de768cc8af/3421a/logo-dark.webp){fig-align="center" width="450"}](https://epi2me.nanoporetech.com/wfindex/)
+:::
+:::
+
 ## Futuro da tecnologia
 
 [![Lu, C., Bonini, A., Viel, J.H. et al. Toward single-molecule protein sequencing using nanopores. Nat Biotechnol 43, 312--322 (2025). https://doi.org/10.1038/s41587-025-02587-y](protein.png){fig-align="center"}](https://www.nature.com/articles/s41587-025-02587-y#citeas)
