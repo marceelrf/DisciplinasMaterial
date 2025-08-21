@@ -761,7 +761,7 @@ $$
 
 -   Somos pesquisadores;
 
--   Versátil;
+-   Comunidade e suporte;
 
 -   Pesquisa 👍;
 :::
@@ -879,7 +879,152 @@ readr::read_tsv(file = here::here("nanopore/genes_disciplina.bed"),
 
 ## Comando `dorado`
 
+```{bash eval=FALSE, echo = TRUE}
+> dorado --help
+Usage: dorado [options] subcommand
+
+Positional arguments:
+aligner
+basecaller
+correct
+demux
+download
+duplex
+summary
+trim
+
+Optional arguments:
+-h --help               shows help message and exits
+-v --version            prints version information and exits
+-vv                     prints verbose version information and exits
+```
+
+## Modelos `dorado`
+
+```{bash eval=FALSE, echo = TRUE}
+# Ver os modelos disponíveis
+dorado download --list
+
+# Baixar o desejado na pasta desejada
+dorado download --model {modelo} --models-directory {PATH}
+```
+
+## Modelos `dorado`
+
+-   `FAST`: Mais rápido e com menor acurácia;
+
+-   `HAC`: Alta acurácia;
+
+-   `SUP`: Super acurácia (maior requisito computacional);
+
+::: callout-tip
+## Para escolher seu modelo.
+
+Modelo `SUP` é uma vantagem em situações de construção de genomas de referência;
+
+Para demais situações o `HAC` já é suficiente;
+:::
+
+## `dorado` `basecaller`
+
+```{bash eval=FALSE, echo = TRUE}
+# chamada HAC sem modificações
+dorado basecaller hac {/path/to/reads.pod5} > calls.bam
+
+#chamada HAC com modificações 6mA e 5mC e 5hmC em CpG
+dorado basecaller hac,6mA,5mCG_5hmCG {/path/to/reads.pod5} > calls.bam
+```
+
+## `dorado` `basecaller`
+
+-   O padrão é salvar como `BAM`;
+
+    -   Isso vai permitir salvar as modificações de base;
+
+-   A performance ideal requer GPU;
+
+    -   Usar a tag `--device "cuda:all"`;
+
+-   Para gerar `fastq` usar `–emit-fastq`;
+
+-   Para novos modelos é necessário utilizar `–emit-moves`;
+
+-   É possível chamar e alinhar ao genoma de referência usando `--reference`;
+
+## `dorado` `basecaller`
+
+::: callout-note
+## Tempo de processamento
+
+\~ 12 horas de chamada de base + alinhamento utilizando GPU RTX 4060;
+
+```{bash eval=FALSE, echo=TRUE}
+dorado basecaller --recursive --trim "all" --modified-bases 5mCG_5hmCG 6mA --reference {fasta} {modelo} pod5/ --device "cuda:all" > calls.bam
+```
+:::
+
 ## Controle de qualidade (QC)
+
+## Controle de qualidade (QC)
+
+-   Garantir que as leituras estejam adequadas para prosseguir as análises;
+
+-   `fastq`;
+
+-   Similar a ideia para dados Illumina;
+
+## FASTQ
+
+[![Arquivo FASTQ.](https://biocorecrg.github.io/RNAseq_course_2019/images/fastq_format.png)](https://biocorecrg.github.io/RNAseq_course_2019/fastq.html)
+
+## Phred score
+
+[![Phred score.](https://www.drive5.com/usearch/manual/qscores.gif){fig-align="center" width="900"}](https://www.drive5.com/usearch/manual/quality_score.html)
+
+## Phred score
+
+$$
+Q = -10\log_{10}{P}
+$$
+
+<br>
+
+$$
+P=10^{\frac{-Q}{10}}
+$$
+
+## Phred score
+
+$$
+P=10^{\frac{-Q}{10}}
+$$
+
+| Q score | Probabilidade de chamada de base incorreta | Acurácia da chamada de base |
+|---------|--------------------------------------------|-----------------------------|
+| 10      | 1 em 10                                    | 90%                         |
+| 20      | 1 em 100                                   | 99%                         |
+| 30      | 1 em 1000                                  | 99,9%                       |
+| 40      | 1 em 10000                                 | 99,99%                      |
+
+## QC
+
+-   `FASTQC` tambem funciona;
+
+-   `NanoPack2` é a atual melhor opção;
+
+    -   `NanoPlot` para visualização das estatísticas;
+
+    -   `Chopper` para trimagem;
+
+## NanoPlot
+
+-   Qualidade (`Q`);
+
+-   Tamanho (`L`);
+
+-   N50;
+
+[![](https://hoytpr.github.io/bioinformatics-semester/fig/N50.png){fig-align="center" width="615"}](https://hoytpr.github.io/bioinformatics-semester/materials/genomics-assembly-reporting/)
 
 ## NanoPlot
 
