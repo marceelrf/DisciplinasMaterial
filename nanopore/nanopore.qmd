@@ -958,6 +958,8 @@ dorado basecaller hac,6mA,5mCG_5hmCG {/path/to/reads.pod5} > calls.bam
 
 \~ 12 horas de chamada de base + alinhamento utilizando GPU RTX 4060;
 
+`{model}` precisa ser o caminho completo;
+
 ```{bash eval=FALSE, echo=TRUE}
 dorado basecaller --recursive --trim "all" --modified-bases 5mCG_5hmCG 6mA --reference {fasta} {modelo} pod5/ --device "cuda:all" > calls.bam
 ```
@@ -1000,7 +1002,7 @@ P=10^{\frac{-Q}{10}}
 $$
 
 | Q score | Probabilidade de chamada de base incorreta | Acurácia da chamada de base |
-|---------|--------------------------------------------|-----------------------------|
+|---------------|-----------------------------------|----------------------|
 | 10      | 1 em 10                                    | 90%                         |
 | 20      | 1 em 100                                   | 99%                         |
 | 30      | 1 em 1000                                  | 99,9%                       |
