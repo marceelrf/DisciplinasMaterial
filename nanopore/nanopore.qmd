@@ -13,6 +13,11 @@ format:
     reference-location: document
     chalkboard: true
     footer: "marcel.ferreira@unesp.br"
+    pointer:
+      pointerSize: 16
+      color: '#ff0800'
+revealjs-plugins:
+  - pointer
 editor: visual
 lang: pt-BR
 slide-number: c/t
@@ -1002,7 +1007,7 @@ P=10^{\frac{-Q}{10}}
 $$
 
 | Q score | Probabilidade de chamada de base incorreta | Acurácia da chamada de base |
-|---------------|-----------------------------------|----------------------|
+|------------------|----------------------------------|---------------------|
 | 10      | 1 em 10                                    | 90%                         |
 | 20      | 1 em 100                                   | 99%                         |
 | 30      | 1 em 1000                                  | 99,9%                       |
