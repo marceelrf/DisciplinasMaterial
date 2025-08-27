@@ -1321,18 +1321,60 @@ bcftools norm -f hg38.fa variantes_filtradas_trim_minac.vcf > variantes_filtrada
 
 ```{bash eval=FALSE, echo=TRUE}
 MODEL_NAME="[YOUR_MODEL_NAME]"         # e.g. r1041_e82_400bps_sup_v500
-
+THREADS=4
+OUTPUT_DIR="ondesalvar"
 run_clair3.sh \
   --bam_fn=input.bam \                 ## change your bam file name here
   --ref_fn=ref.fa \                    ## change your reference file name here
   --threads=${THREADS} \               ## maximum threads to be used
   --platform="ont" \                   ## options: {ont,hifi,ilmn}
   --model_path="${CONDA_PREFIX}/bin/models/${MODEL_NAME}" \ 
-  --output=${OUTPUT_DIR}               ## output path prefix 
+  --output=${OUTPUT_DIR} \              ## output path prefix 
+  --sample_name="nomedaamostra" \
+  --gvcf \
+  --bed_fn= "genes_disciplina.bed"
 ```
 
-```{r}
+## Multi amostras
 
+-   `GLnexus`;
+
+-   Modelo para usar \[[link](http://www.bio8.cs.hku.hk/clair3_trio/config/clair3.yml)\];
+
+```{bash eval=FALSE, echo=TRUE}
+# rodar o glnexus para juntar as amostras
+glnexus_cli --config {clair3.yml} --threads 12 [1.gvcf, 2.gvcf, 3.gvcf...] > all_samples.bcf
+
+# transformar em vcf
+bcftools view -Ov -o all_samples.vcf all_samples.bcf
+```
+
+## Anotações
+
+-   Na pasta do drive Genoma/ temos o arquivo `ncbi_dbsnp_disc.vcf` que contém todas as variantes do dbSNP para nossa região;
+
+```{bash eval=FALSE, echo=TRUE}
+# compactar utilizando bgzip
+bgzip -c "ncbi_dbsnp_disc.vcf" > "ncbi_dbsnp_disc.vcf.gz"
+
+# Indexar o vcf
+tabix -p vcf "ncbi_dbsnp_disc.vcf.gz"
+
+# anotar o nosso vcf
+bcftools annotate --threads 10 -a ncbi_dbsnp_disc.vcf.gz -c CHROM,POS,REF,ALT,-,ID -o annotado.vcf.gz nosso.vcf.gz
+```
+
+## Consultando variantes
+
+```{bash eval=FALSE, echo=TRUE}
+# Informações das variantes
+bcftools query -f "%CHROM\t%POS\t%ID\t%REF\t%ALT[\t%GT]" {nosso.vcf}
+
+# Genótipos como bases
+bcftools query -f "%CHROM\t%POS\t%ID\t%REF\t%ALT[\t%TGT]" {nosso.vcf}
+
+# Lista de amostas
+bcftools query -s {nosso.vcf}
 ```
 
 # Variantes estruturais
