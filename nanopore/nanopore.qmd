@@ -1047,6 +1047,96 @@ chopper -q 20 -l 1000 reads.fastq > trimmed_reads.fastq
 
 # Mapeamento de sequências
 
+## Mapeamento/alinhamento
+
+-   Ao final da chamada de bases teremos um `.fastq` ou `.bam`[^1];
+
+[^1]: Vamos ver o que é um arquivo bam em breve;
+
+<br>
+
+-   Esses arquivos contém apenas as sequências detectadas. Não contém informações das coordenadas genômicas;
+
+<br>
+
+-   Para prosseguirmos com as análises é necessário alinhar alguma referência conhecida;
+
+## Genoma de referência
+
+-   Uma sequência de DNA consensual e representativa de uma espécie;
+
+-   Não é o genoma de uma única pessoa, mas sim um "modelo" ou "padrão";
+
+-   <https://www.ncbi.nlm.nih.gov/datasets/genome/>
+
+## Genoma de referência
+
+...
+
+::: {style="text-align: center;"}
+<iframe src="https://giphy.com/embed/mMl1DphmngffO" width="343" height="480" style frameBorder="0" class="giphy-embed" allowFullScreen>
+
+</iframe>
+
+<p><a href="https://giphy.com/gifs/bear-polar-mMl1DphmngffO">via GIPHY</a></p>
+:::
+
+## Ursus maritimus
+
+[![Genoma do Urso polar](images/ursopolar1.png){fig-align="center"}](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_017311325.1/)
+
+## Arquivos de genoma de referência
+
+-   `.fasta`: Sequência de DNA por cromossomo;
+
+-   `genomic.gff`: Coordenadas genomicas de mrna, exons, intros, ...;
+
+-   `rna.fna`[^2]: Sequências dos transcritos;
+
+-   `protein.fna`: Sequências das proteínas;
+
+[^2]: .fna e .fa são outras versões de fasta.
+
+## Criar índices (`index`)
+
+-   Arquivos de index são fundamentais para auxiliar o programas nas análises;
+
+-   Eles evitam erros e computações demasiadas;
+
+. . .
+
+[![](https://www.book-editing.com/wp-content/uploads/2019/03/back-of-book-index-1080x675.jpg){fig-alt="Indicie de um livro" fig-align="center" width="700"}](https://www.book-editing.com/why-book-indexing/)
+
+## Indexando genoma
+
+```{bash eval=FALSE,echo=TRUE}
+# usando BWA
+
+bwa index {genoma}.fa
+
+# usando minimap2
+
+minimap2 -d {ref}.mmi {genoma}.fa
+```
+
+-   Use `bwa` quando for trabalhar com dados de Illumina também;
+
+## bwa index
+
+-   Operação demorada;
+
+-   Gera diversos arquivos: `.amb`, `.ann`, `.bwt`, `.pac` e `.sa`;
+
+-   Na prática quase triplica o espaço do genoma em nosso computador;
+
+## Alinhando dados de nanopore
+
+-   Padrão é o `minimap2`;
+
+-   O `dorado aligner` utiliza o `minimap2` no seu interior;
+
+    -   `dorado aligner` consegue utilizar `bam` como input;
+
 ## Comando `minimap2`
 
 ```{bash eval=FALSE, echo=TRUE}
@@ -1063,17 +1153,193 @@ minimap2 -ax map-ont -Y -t {THREADS} -R {RG} {REF} {fastq} -o {sam}
 
 -   `sam` = Arquivo do alinhamento no formato SAM;
 
+## Arquivo SAM
+
+-   Arquivo padrão;
+
+-   Legível por humanos;
+
+-   Cabeçalho (`@`) + tabela de alinhamento;
+
+-   Documentação [online](https://samtools.github.io/hts-specs/SAMv1.pdf);
+
+-   `BAM`[^3] e `CRAM` são versões binárias mais leves;
+
+[^3]: `BAM` é o formato para a maioria das aplicações;
+
+## Arquivo SAM
+
+. . .
+
+## samtools
+
+-   Principal programa para manipulação desses arquivos;
+
+<br>
+
+-   \> 63 mil citações!!!
+
+<br>
+
+-   Roda no fundo de milhares de aplicações;
+
+## Fluxograma
+
+```{bash eval=FALSE, echo=TRUE}
+# Ordenar o arquivo e já converte para BAM
+samtools sort {amostra.sam} > {amostra.bam}
+# Ou
+# samtools sort -o {amostra.bam} {amostra.sam} 
+
+# Cria o index para o BAM
+samtools index {amostra.bam}
+```
+
+## IGV
+
+-   Navegador de genomas;
+
+<br>
+
+-   Permite visualizações de arquivos `BAM`, `VCF`, `BED`, dentre outros;
+
+<br>
+
+-   Embora exista a versão online, recomendo a versão local;
+
+## Operações de interesse no samtools
+
+```{bash eval=FALSE, echo=TRUE}
+# Recortar região/converter
+samtools view [options] {amostra_in.bam} > {amostra_out.bam}
+
+# Exportar fastq
+samtools fastq {amostra.bam} > {amostra.fastq}
+
+# Gerar cobertura por base
+samtools depth {amostra.bam} > {amostra.txt}
+
+# Cobertura dos genes usando BED
+samtools bedcov {genes.bed} {amostra.bam} > {amostra.bed}
+
+# Cobertura média de uma região "chr:start-end". Pode ser uma amostra ou várias.
+samtools coverage -b {amostra.bam} -r "chr:start-end" > regiao.txt
+```
+
 # Chamada de variantes
+
+## Variantes
+
+[![Variantes.](https://www.genome.gov/sites/default/files/inline-images/Genomic%20variation_INDELS%20DEL%20SNV%20TANDEM.png){fig-align="center" width="1000"}](https://www.genome.gov/about-genomics/educational-resources/fact-sheets/human-genomic-variation)
+
+## Diferentes softwares
+
+-   GATK;
+
+-   DeepVariant;
+
+-   Freebayes;
+
+-   clair3;
+
+-   samtools + Picard;
+
+-   Entre outros...
+
+## `freebayes`
+
+-   Modelagem bayesiana;
+
+-   Monta pequenos haplótipos;
+
+-   Criado para short-reads;
+
+-   Propenso a erros do tipo 1 (Falsos positivos);
+
+-   Pode ser usado para uma ou várias amostras;
 
 ## Comando `freebayes`
 
 ```{bash eval=FALSE, echo=TRUE}
-freebayes -f {REF} -L {BAM_LIST} -t {REGIONS.BED} > var.vcf
+# Uma amostra
+freebayes -f {REF} -t {REGIONS.BED} {amostra.bam} > var.vcf
+
+# Multisample focando em uma região
+ls *.bam > BAM_LIST.txt
+freebayes -f {REF} -L {BAM_LIST.txt} -t {REGIONS.BED} > var.vcf
 ```
+
+## Arquivo VCF
+
+-   Arquivo padrão;
+
+-   Legível por humanos;
+
+-   Cabeçalho (`#`) + tabela de alinhamento;
+
+-   Documentação [online](https://samtools.github.io/hts-specs/VCFv4.2.pdf);
+
+-   Variações: `.vcf`, `.vcf.gz`, `.bcf`;
+
+## Arquivo VCF
+
+. . .
+
+## Filtrando arquivos VCF
+
+```{bash eval=FALSE, echo=TRUE}
+# remove variantes de qualidade menor que 1
+bcftools view --exclude 'QUAL<1' variantes.vcf > variantes_filtradas.vcf
+
+# quebra os alelos alternativos em várias linhas
+bcftools view --trim-alt-alleles variantes_filtradas.vcf > variantes_filtradas_trim.vcf
+
+# remove variantes que não tenham nenhum alelo alternativo nas amostras
+bcftools view --min-ac 1 variantes_filtradas_trim.vcf > variantes_filtradas_trim_minac.vcf
+
+# normaliza o vcf com base no genoma de referência
+bcftools norm -f hg38.fa variantes_filtradas_trim_minac.vcf > variantes_filtradas_trim_minac_norm.vcf
+```
+
+## `clair3`
+
+-   Desenhada para dados de diferentes plataformas;
+
+    -   ONT, PacBio, Illumina;
+
+-   Usa deep learning;
+
+-   Modos `pileup` e `full aligment` (`merge` combinação);
+
+-   Roda uma amostra por vez;
+
+    -   `--gvcf`;
 
 ## Comando `clair3`
 
+-   Usando `bioconda`:
+
+```{bash eval=FALSE, echo=TRUE}
+MODEL_NAME="[YOUR_MODEL_NAME]"         # e.g. r1041_e82_400bps_sup_v500
+
+run_clair3.sh \
+  --bam_fn=input.bam \                 ## change your bam file name here
+  --ref_fn=ref.fa \                    ## change your reference file name here
+  --threads=${THREADS} \               ## maximum threads to be used
+  --platform="ont" \                   ## options: {ont,hifi,ilmn}
+  --model_path="${CONDA_PREFIX}/bin/models/${MODEL_NAME}" \ 
+  --output=${OUTPUT_DIR}               ## output path prefix 
+```
+
+```{r}
+
+```
+
 # Variantes estruturais
+
+## Variantes estruturais (SV)
+
+[![Variantes estruturais.](https://www.genome.gov/sites/default/files/inline-images/Genomic%20variation_Structral%20variants.png){fig-align="center" width="1000"}](https://www.genome.gov/about-genomics/educational-resources/fact-sheets/human-genomic-variation)
 
 # Determinação de haplótipos
 
