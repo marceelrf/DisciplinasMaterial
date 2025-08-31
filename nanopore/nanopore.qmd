@@ -1007,7 +1007,7 @@ P=10^{\frac{-Q}{10}}
 $$
 
 | Q score | Probabilidade de chamada de base incorreta | Acurácia da chamada de base |
-|------------------|----------------------------------|---------------------|
+|------------------|---------------------------------|---------------------|
 | 10      | 1 em 10                                    | 90%                         |
 | 20      | 1 em 100                                   | 99%                         |
 | 30      | 1 em 1000                                  | 99,9%                       |
@@ -1071,7 +1071,7 @@ chopper -q 20 -l 1000 reads.fastq > trimmed_reads.fastq
 
 ## Genoma de referência
 
-...
+. . .
 
 ::: {style="text-align: center;"}
 <iframe src="https://giphy.com/embed/mMl1DphmngffO" width="343" height="480" style frameBorder="0" class="giphy-embed" allowFullScreen>
@@ -1383,7 +1383,246 @@ bcftools query -s {nosso.vcf}
 
 [![Variantes estruturais.](https://www.genome.gov/sites/default/files/inline-images/Genomic%20variation_Structral%20variants.png){fig-align="center" width="1000"}](https://www.genome.gov/about-genomics/educational-resources/fact-sheets/human-genomic-variation)
 
+## Variantes estruturais (SV)
+
+-   Alterações genômicas ≥50 bp: deleções, inserções, duplicações, inversões, translocações;
+
+<!-- -->
+
+-   Representam \~1% do genoma humano, mas têm grande impacto funcional;
+
+<!-- -->
+
+-   Podem afetar genes inteiros, elementos regulatórios e arquitetura cromossômica;
+
+<!-- -->
+
+-   Responsáveis por \~17% das variações genéticas entre indivíduos;
+
+## Desafios com short reads
+
+-   Reads curtos não conseguem "span" breakpoints de SVs grandes;
+
+<!-- -->
+
+-   Dificuldade em regiões repetitivas e de baixa complexidade;
+
+<!-- -->
+
+-   Subestimação de SVs: detecta apenas \~60-70% das SVs reais;
+
+<!-- -->
+
+-   Problemas com inversões e translocações balanceadas;
+
+<!-- -->
+
+-   Resolução limitada do tamanho exato das variantes;
+
+## Vantagens dos ONT long reads
+
+-   Reads longos (1-100+ kb) conseguem atravessar SVs complexas;
+
+-   Detecção direta de breakpoints e sequências de inserção;
+
+<!-- -->
+
+-   Melhor caracterização de elementos repetitivos (Alu, LINE, STRs);
+
+<!-- -->
+
+-   Capacidade de resolver SVs aninhadas e complexas;
+
+<!-- -->
+
+-   Determinação "precisa" do tamanho e conteúdo das variantes;
+
+## Programas
+
+-   Sniffles2;
+
+<br>
+
+-   SVIM;
+
+<br>
+
+-   [cuteSV](https://github.com/tjiangHIT/cuteSV);
+
+## Sniffles2
+
+-   Permite análise de TRIOS (Pais e filhos), populações (multiplas amostras) e mosaico;
+
+```{bash eval=FALSE, echo=TRUE}
+# Padrão
+sniffles --input {amostra.bam} --snf {amostra.snf} --vcf {amostra.vcf}
+
+#Multisample
+sniffles --input {amostra1.snf} {amostra2.snf} ... --vcf {todasamostra.vcf}
+```
+
+# Short tandem repeats
+
+## O que são STRs?
+
+-   Sequências repetitivas de 1-6 nucleotídeos em tandem (ex: (CAG)n, (GGCCCC)n);
+
+<!-- -->
+
+-   \~3% do genoma humano, altamente polimórficos na população;
+
+<!-- -->
+
+-   Unidade repetitiva: motif básico que se repete;
+
+<!-- -->
+
+-   Expansões patogênicas: aumento anormal do número de repetições;
+
+## Identificação
+
+[![](https://old-ib.bioninja.com.au/_Media/str_med.jpeg){fig-align="center"}](https://old-ib.bioninja.com.au/standard-level/topic-3-genetics/35-genetic-modification-and/dna-profiling.html)
+
+## CODIS
+
+[![Sistema de FBI.](https://genetek-biopharma.com/wp-content/uploads/2023/05/picture1.png){fig-align="center"}](https://genetek-biopharma.com/human-identification-kits/)
+
+## Limitações críticas dos short reads
+
+-   **Impossibilidade de sequenciar STRs grandes**: reads de 150bp não conseguem cobrir expansões de milhares de pb;
+
+<!-- -->
+
+-   **PCR bias**: amplificação preferencial de alelos menores;
+
+<!-- -->
+
+-   **Stuttering**: artefatos de deslizamento durante PCR;
+
+<!-- -->
+
+-   **Cobertura desigual**: regiões GC-ricas têm baixa cobertura;
+
+## Vantagens transformadoras dos ONT long reads
+
+-   **Sequenciamento direto**: reads de 10-100+ kb cobrem completamente as expansões;
+
+<!-- -->
+
+-   **Sem PCR**: biblioteca livre de amplificação elimina vieses;
+
+<!-- -->
+
+-   **Detecção precisa do tamanho**: contagem exata de repetições;
+
+<!-- -->
+
+-   **Resolução de mosaicismo**: diferentes populações de alelos;
+
+<!-- -->
+
+-   **Caracterização de interrupções**: sequências que quebram a repetição perfeita;
+
+## straglr
+
+-   Ferramenta recomendada nos scripts da ONT;
+
+-   Eu acho "estranha";
+
+```{bash eval=FALSE, echo=TRUE}
+python3 straglr.py {amostra.bam} {ref.fasta} {output_prefix} --loci {regiao.bed}
+```
+
 # Determinação de haplótipos
+
+## O que são haplótipos?
+
+-   Combinação de variantes genéticas (SNPs, indels) em um mesmo cromossomo;
+-   Herança em bloco: variantes ligadas fisicamente são transmitidas juntas;
+-   Importância clínica: associações com doenças, farmacogenômica, estudos populacionais;
+
+## Por que determinar haplótipos?
+
+-   Compreender herança de variantes patogênicas;
+-   Análise de desequilíbrio de ligação;
+-   Estudos de associação genômica (GWAS);
+-   Medicina personalizada;
+
+## Desafios com short reads (Illumina)
+
+-   Reads curtos (\~150-300 bp) não conseguem conectar variantes distantes;
+-   Necessidade de inferência estatística (haplotype phasing);
+-   Limitações em regiões repetitivas e estruturalmente complexas;
+-   Erros de fase em variantes heterozigóticas;
+
+## Vantagens dos ONT long reads:
+
+-   Reads longos (1-100+ kb) capturam múltiplas variantes em uma única molécula;
+-   Determinação direta de fase (direct phasing);
+-   Melhor resolução de variantes estruturais;
+-   Cobertura de regiões complexas do genoma;
+
+## Faseamento
+
+[![Vantagens no faseamento](https://wp.unil.ch/gtf/files/2020/05/EtNR1T.png){fig-align="center"}](https://wp.unil.ch/gtf/applications/)
+
+## Programas
+
+-   [WhatsHap](https://whatshap.readthedocs.io/en/latest/);
+
+<br>
+
+-   [Longphase](https://github.com/twolinin/longphase);
+
+<br>
+
+-   [HapCUT2](https://github.com/vibansal/HapCUT2);
+
+## Fluxo de trabalho
+
+```{mermaid}
+flowchart LR
+   f1[bam]
+   f2[vcf]
+   f3(genome)
+
+   f1 & f2 & f3 --> p1{phase}
+   p1 --> f4[phased.vcf]
+   f4 & f1 --> p2{haplotag}
+   p2 --> f5[phased.bam]
+```
+
+## WhatsHap
+
+-   Permite trabalhar com \>1 amostra no vcf;
+
+-   Não lida com variantes multialelicas;
+
+-   Não lida com SVs;
+
+```{bash eval=FALSE, echo=TRUE}
+# Phase
+whatshap phase --indels -o phased.vcf --reference=reference.fasta input.vcf input.bam
+
+#Haplotag
+whatshap haplotag -o haplotagged.bam --reference reference.fasta phased.vcf.gz alignments.bam
+```
+
+## Longphase
+
+-   Permite apenas 1 amostra por vcf;
+
+-   Suporta com SVs;
+
+-   É capaz de utilizar a metilação para a fase;
+
+```{bash eval=FALSE, echo=TRUE}
+# Phase. --sv-file passa o vcf de SVs
+longphase phase -s SNP.vcf -b alignment.bam -r reference.fasta -t 8  -o phased_prefix --indels --ont
+
+# Haplotag 
+longphase haplotag -r reference.fasta -s phased_snp.vcf --sv-file phased_sv.vcf -b alignment.bam -t 8 -o tagged_bam_prefix
+```
 
 # Montagem de genomas
 
