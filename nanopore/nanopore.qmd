@@ -349,7 +349,7 @@ NIH: National Institute of Health
 
 ::: {style="font-size:80%;"}
 |                |                              |                         |                     |                       |                                                      |
-|-----------|-----------|-----------|-----------|-----------|----------------|
+|------------|------------|------------|------------|------------|------------|
 | **Plataforma** | **Tipo de Leitura**          | **Tamanho de Leitura**  | **Taxa de Erro**    | **Tempo de Execução** | **Aplicações Comuns**                                |
 | Illumina       | Short reads                  | 150--300 pares de bases | \<1%                | 1--2 dias             | RNA-seq, exoma, WGS, genotipagem                     |
 | PacBio Hifi    | Long reads (alta fidelidade) | 10--25 kb (HiFi)        | \~1%                | 1--2 dias             | Montagem genômica, haplótipos, variantes estruturais |
@@ -1007,7 +1007,7 @@ P=10^{\frac{-Q}{10}}
 $$
 
 | Q score | Probabilidade de chamada de base incorreta | Acurácia da chamada de base |
-|---------------|-----------------------------------|----------------------|
+|------------------|----------------------------------|---------------------|
 | 10      | 1 em 10                                    | 90%                         |
 | 20      | 1 em 100                                   | 99%                         |
 | 30      | 1 em 1000                                  | 99,9%                       |
@@ -1640,72 +1640,60 @@ longphase haplotag -r reference.fasta -s phased_snp.vcf --sv-file phased_sv.vcf 
 
 -   **Genomas de referência**: espécies não caracterizadas, variedades/linhagens específicas;
 
-```{=html}
 <!-- -->
-```
+
 -   **Genômica comparativa**: evolução, diversidade, adaptações;
 
-```{=html}
 <!-- -->
-```
+
 -   **Medicina personalizada**: genomas individuais, variações estruturais complexas;
 
-```{=html}
 <!-- -->
-```
+
 -   **Biotecnologia**: otimização de organismos produtores, synthetic biology;
 
 ## Limitações críticas dos short reads
 
 -   **Regiões repetitivas**: sequências \>150bp não podem ser resolvidas;
 
-```{=html}
 <!-- -->
-```
+
 -   **Gaps inevitáveis**: centromeros, heterocromatina, rDNA clusters;
 
-```{=html}
 <!-- -->
-```
+
 -   **Montagens fragmentadas**: milhares de contigs pequenos;
 
-```{=html}
 <!-- -->
-```
+
 -   **Variações estruturais perdidas**: inversões, translocações complexas;
 
-```{=html}
 <!-- -->
-```
+
 -   **Necessidade de scaffolding**: dados adicionais (mate-pairs, Hi-C);
 
 ## Vantagens revolucionárias dos ONT long reads
 
 -   **Spanning repeats**: reads de 10-100kb atravessam a maioria das repetições
 
-```{=html}
 <!-- -->
-```
+
 -   **Montagens ultra-contíguas**: cromossomos completos em single contigs
 
-```{=html}
 <!-- -->
-```
+
 -   **Resolução de regiões complexas**: centromeros, telomeros, rDNA
 
-```{=html}
 <!-- -->
-```
+
 -   **Detecção completa de SVs**: rearranjos estruturais preservados
 
-```{=html}
 <!-- -->
-```
+
 -   **Redução dramática de gaps**: genomas nearly gap-free
 
-```{=html}
 <!-- -->
-```
+
 -   **Haplotype phasing**: separação de cromossomos homólogos
 
 ## Programas
@@ -1714,19 +1702,16 @@ longphase haplotag -r reference.fasta -s phased_snp.vcf --sv-file phased_sv.vcf 
 
 -   **Canu**: robusto, alta qualidade, computacionalmente intensivo;
 
-```{=html}
 <!-- -->
-```
+
 -   **Flye**: rápido, eficiente em memória, bom para genomas grandes;
 
-```{=html}
 <!-- -->
-```
+
 -   **Raven**: ultrarrápido, otimizado para long reads;
 
-```{=html}
 <!-- -->
-```
+
 -   **NextDenovo**: híbrido, combina estratégias diferentes;
 
 ## Programas
@@ -1823,7 +1808,7 @@ samtools index OCA2_ctgs.bam
 
 -   **Diferenciação celular**: estabelecimento de identidade celular;
 
-## **Contextos principais:** 
+## **Contextos principais:**
 
 -   **CpG islands**: regiões ricas em dinucleotídeos CG;
 
@@ -1869,9 +1854,8 @@ samtools index OCA2_ctgs.bam
 
 -   Kit de ferramentas desenvolvida pela Oxford Nanopore Technologies;
 
-```{=html}
 <!-- -->
-```
+
 -   Pipeline completo: desde BAM files até visualizações finais;
 
 -   Interface command-line intuitiva e [bem documentada](https://nanoporetech.github.io/modkit/);
@@ -1939,5 +1923,35 @@ modkit entropy --in-bam ${mod_bam} \
 -   [Localize](https://nanoporetech.github.io/modkit/intro_localize.html)
 
 -   [Open Chromatin](https://nanoporetech.github.io/modkit/intro_open_chromatin.html)
+
+# Finalização
+
+## Agradecimentos
+
+-   PPG Genética;
+
+<br>
+
+-   Gembio lab;
+
+<br>
+
+-   Debora Kazumi Maeda;
+
+<br>
+
+## Em especial
+
+![O chefe da genética forense: João Hamamura.](joao.jpg){fig-align="center" width="550"}
+
+## Contato
+
+-   marcel.ferreira\@unesp.br
+
+-   https://www.linkedin.com/in/marceelrf/
+
+-   https://github.com/marceelrf
+
+# Obrigado!
 
 # Referências
