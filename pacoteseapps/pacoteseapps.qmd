@@ -1,0 +1,26 @@
+---
+title: "Desenvolvimento de pacotes e aplicativos em R"
+subtitle: "ffff"
+author: "Marcel Ferreira"
+date: today
+format:
+  revealjs:
+    theme: simple
+    transition: fade
+    transition-speed: slow
+    width: 1500
+    page-layout: full
+    reference-location: document
+    chalkboard: true
+    footer: "marcel.ferreira@unesp.br"
+    pointer:
+      pointerSize: 16
+      color: '#ff0800'
+revealjs-plugins:
+  - pointer
+editor: visual
+lang: pt-BR
+slide-number: c/t
+bibliography: references.bib
+engine: knitr
+---
