@@ -30,6 +30,8 @@ engine: knitr
 
 # Introdução
 
+## Gene MC1R
+
 # Métodos
 
 # Resultados
