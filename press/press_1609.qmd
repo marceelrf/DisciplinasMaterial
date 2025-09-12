@@ -28,8 +28,22 @@ engine: knitr
 
 [![](paper.png){fig-align="center"}](https://doi.org/10.1002/elps.8141)
 
-## Introdução
+# Introdução
 
-## Métodos
+# Métodos
 
-## Resultados
+# Resultados
+
+## 
+
+![](tab1.png){fig-align="center"}
+
+## 
+
+![](fig1.png){fig-align="center"}
+
+## 
+
+![](fig2.png){fig-align="center"}
+
+# Conclusão
