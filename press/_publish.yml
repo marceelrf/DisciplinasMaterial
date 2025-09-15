@@ -1,0 +1,4 @@
+- source: press_1609.qmd
+  quarto-pub:
+    - id: 74ea61be-8175-45ea-be99-55beb905e6f1
+      url: https://marceelrf.quarto.pub/investigation-of-the-mc1r-gene-sequence-variation-using-oxford-nanopore-sequencing
