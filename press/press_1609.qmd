@@ -80,11 +80,87 @@ Nesta pesquisa, os autores mostraram que a ONT oferece uma alternativa convenien
 
 # Métodos
 
+## Métodos
+
+-   Uma coorte de 126 poloneses, sendo 65 ruívos;
+
+-   R9 (Maio 2018) e R10.4.1 (Setembro 2024);
+
+-   *Target enrichment*: região de 1590 bp;
+
+## Primeira coorte (R9)
+
+-   1D PCR barcoding amplicons kit V10 (SQK-LSK108);
+
+-   FLO-MIN106 (R9.4);
+
+-   3 corridas e tempo de corrida \< 10h;
+
+-   Albacore \> NanoOK \> Minimap2 \> Nanopolish;
+
+## Segunda coorte (R10)
+
+-   12 amostras mais problemáticas ⟶ RHC;
+
+-   Ligation Sequencing Kit V14 (SQK-LSK114);
+
+-   PCR Barcoding Expansion Pack 1--12 (EXPPBC001);
+
+-   FLO-MIN114 (R10.4.1);
+
+-   \~24 horas de sequenciamento;
+
+-   EPI2ME ⟶ `wf-basecalling 1.3.0` e `wf-alignment 1.2.0`;
+
+## EPI2ME
+
+-   Ferramenta GUI da ONT;
+
+-   `wf-basecalling`:
+
+    -   `Dorado`;
+
+-   `wf-alignment`:
+
+    -   `minimap2`;
+
 # Resultados
+
+## Primeira coorte (R9)
+
+-   21 variantes identificadas:
+
+    -   10 missense;
+
+    -   2 sinônimas;
+
+    -   9 fora do éxon = 8 na `5' UTR` e 1 na `3' UTR`;
+
+-   Pequenos indels (\<5 bp) foram removidos;
 
 ## 
 
 ![](tab1.png){fig-align="center"}
+
+## Validação
+
+-   Erros sistemáticos:
+
+    -   Qualidade no Nanopolish, cobertura, equilíbrio alélico em heterozigotos (alelo alternativo \<20%) e frequência alélica menor (MAF);
+
+-   Ion Xpress Plus Fragment Library Kit;
+
+-   Ion Torrent Personal Genome Machine^TM^ (PGM^TM^);
+
+-   21 variantes verdadeiras detectadas por Nanopolish concordaram com resultados Ion Torrent;
+
+-   As outras 6 se provaram erros sistemáticos (\~22%);
+
+## Segunda coorte (R10)
+
+-    99.9% das reads alinharam a região de MC1R, com qualidade média de 23.3;
+
+-   
 
 ## 
 
