@@ -124,6 +124,8 @@ Nesta pesquisa, os autores mostraram que a ONT oferece uma alternativa convenien
 
     -   `minimap2`;
 
+-   Fasearam com WhatsHap (não expecificam o `wf`)
+
 # Resultados
 
 ## Primeira coorte (R9)
@@ -160,7 +162,11 @@ Nesta pesquisa, os autores mostraram que a ONT oferece uma alternativa convenien
 
 -    99.9% das reads alinharam a região de MC1R, com qualidade média de 23.3;
 
--   
+-   O erro na posiçõa 16:89920180 (A ⟶ T), mais comum nas R9, não foi observado nas R10;
+
+-   Melhora em pequnos indels;
+
+-   Alta confiança na inserção em 16:89919342 (c.86.1insA \| p.Asn29fs, rs796296176) ⟶ contido no HIrisplex-s;
 
 ## 
 
@@ -168,6 +174,20 @@ Nesta pesquisa, os autores mostraram que a ONT oferece uma alternativa convenien
 
 ## 
 
-![](fig2.png){fig-align="center"}
+![Faseamento via WhatsHap no EPI2ME.](fig2.png){fig-align="center"}
 
 # Conclusão
+
+## Conclusão
+
+-   **ONT** é uma solução adequada para análise do gene **MC1R;**
+
+    -   Protocolo simples, reprodutível e superior aos métodos convencionais por permitir o estudo completo dos éxons, variantes raras e parte do promotor;
+
+-   Alta acurácia - EPI2ME - Faseamento baseado em leituras;
+
+-   Método aprimora a predição de **pigmentação** em contextos forenses e antropológicos;
+
+## Mensagem final
+
+O sequenciamento por ONT mostrou-se um método simples e preciso para analisar o gene **MC1R**, permitindo identificar variantes completas (inclusive raras) e a região promotora, o que amplia aplicações em **predição de pigmentação forense/antropológica** e em estudos sobre **sensibilidade à dor**.
