@@ -32,6 +32,52 @@ engine: knitr
 
 ## Gene MC1R
 
+-   *Melanocyte-stimulating hormone receptor*;
+
+-   Dermatologia, câncer, genética, estudos de sensibilidade à dor, biologia evolutiva e forense;
+
+-   Chr 16 (16q24.3);
+
+-   Único exon = 951 bp;
+
+-   \>200 variantes são reportadas;
+
+-   Associação com sobreprodução de feomelanina;
+
+## Gene MC1R
+
+[![](melanin.png){fig-align="center" width="650"}](https://www.threads.com/@smax_b/post/DM1Lz2SSpEn/its-two-types-of-melanin)
+
+## Gene MC1R
+
+-   Varios TSS locarizados na região compreendida 600 bp *upsteam* do primeiro éxon;
+
+-   Experimentalmente foi confirmada uma região com 517 bp com atividade promotora;
+
+-   Estudos posteriores revelaram locais importantes para a função do promotor MC1R na região 5′-UTR, e foi encontrado um alto nível de variação nessa região em populações africanas, asiáticas e europeias;
+
+-   rs3212361 ⟶ níveis reduzidos de transcritos contribuindo para sensitividade a dor e cabelos ruívos (RHC);
+
+## Gene MC1R
+
+![](map04916_20250915_090643.png){fig-align="center"}
+
+## Oxford Nanopore Technology (ONT)  
+
+![Wang et al. 2021](https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41587-021-01108-x/MediaObjects/41587_2021_1108_Fig1_HTML.png?as=webp){fig-align="center"}
+
+## Oxford Nanopore Technology (ONT) 
+
+-   A tecnologia R9 tinha acurácia de \~85%-94%;
+
+<br>
+
+-   Já R10.4.1 supera 99%;
+
+## Objetivos
+
+Nesta pesquisa, os autores mostraram que a ONT oferece uma alternativa conveniente e altamente precisa para estudar a variação da sequência do gene MC1R, incluindo todo o exon e o promotor mínimo, permitindo a análise da heterozigosidade composta e, assim, capturar melhor o efeito fenotípico desse gene.
+
 # Métodos
 
 # Resultados
