@@ -21,6 +21,13 @@ revealjs-plugins:
 editor: visual
 lang: pt-BR
 slide-number: c/t
-bibliography: references.bib
 engine: knitr
 ---
+
+# Introdução a disciplina
+
+# Linguagem R
+
+# Pacotes
+
+# Aplicativos com Shiny
