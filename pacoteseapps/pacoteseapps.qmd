@@ -26,11 +26,13 @@ engine: knitr
 
 # Introdução a disciplina
 
+
 ## Avaliação
 
 -   Construção de um pacote;
 
 -   Construção de um aplicativo;
+
 
 # Linguagem R
 
