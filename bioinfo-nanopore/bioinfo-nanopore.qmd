@@ -43,3 +43,13 @@ NIH: National Institute of Health
 ## Oxford Nanopore
 
 ![Principio do sequenciamento ONT](images/ont_prinmods.png){fig-align="center" width="1250"}
+
+## Oxford Nanopore
+
+## Fluxograma
+
+## Basecalling
+
+-   Conversão de sinal elétrico em sequências;
+
+-   POD5 -\> BAM;
