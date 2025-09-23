@@ -39,3 +39,7 @@ NIH: National Institute of Health
 ::: aside
 NIH: National Institute of Health
 :::
+
+## Oxford Nanopore
+
+![Principio do sequenciamento ONT](images/ont_prinmods.png){fig-align="center" width="1250"}
