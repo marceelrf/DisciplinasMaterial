@@ -48,8 +48,218 @@ NIH: National Institute of Health
 
 ## Fluxograma
 
+![Bioinformatics Pipeline](Mermaid Chart - Create complex, visual diagrams with text. A smarter way of creating diagrams.-2025-07-23-163425.svg){fig-align="center" width="1150"}
+
 ## Basecalling
 
--   Conversão de sinal elétrico em sequências;
+-   Procedimento no qual o sinal elétrico (`.pod5`) é convertido em bases (`.fastq` \| `.bam`);
 
--   POD5 -\> BAM;
+-   Momento crucial onde se define o perfil da análise que será realizada;
+
+-   Erros aqui prejudicam todas as demais análises;
+
+-   `Dorado`;
+
+## Basecalling - `Dorado`
+
+-   Contem diversos modelos:
+    -   chamada de bases;
+    -   modificação de bases;
+    -   polimento;
+    -   variantes;
+
+## Comando `dorado`
+
+```{bash eval=FALSE, echo = TRUE}
+> dorado --help
+Usage: dorado [options] subcommand
+
+Positional arguments:
+aligner
+basecaller
+correct
+demux
+download
+duplex
+summary
+trim
+
+Optional arguments:
+-h --help               shows help message and exits
+-v --version            prints version information and exits
+-vv                     prints verbose version information and exits
+```
+
+## Qual modelo usar?
+
+```{bash eval=FALSE, echo=TRUE}
+{analyte}_{pore}_{chemistry}_{speed}@version
+```
+
+-   `analyte`: DNA ou RNA?
+
+-   `pore`: Qual técnologia de poro? (`R10.4.1`/`R9.4.1`)
+
+-   `chemistry`: Qual kit foi utilizado foi utilizado?
+
+-   `speed`: Velocidade de leitura durante o sequenciamento (DNA 400bps)
+
+-   `version`: Versão do modelo
+
+## Modelos `dorado`
+
+```{bash eval=FALSE, echo = TRUE}
+# Ver os modelos disponíveis
+dorado download --list
+
+# Baixar o desejado na pasta desejada
+dorado download --model {modelo} --models-directory {PATH}
+```
+
+## Modelos `dorado`
+
+-   `FAST`: Mais rápido e com menor acurácia;
+
+-   `HAC`: Alta acurácia;
+
+-   `SUP`: Super acurácia (maior requisito computacional);
+
+::: callout-tip
+## Para escolher seu modelo.
+
+Modelo `SUP` é uma vantagem em situações de construção de genomas de referência;
+
+Para demais situações o `HAC` já é suficiente;
+:::
+
+## `dorado` `basecaller`
+
+```{bash eval=FALSE, echo = TRUE}
+# chamada HAC sem modificações
+dorado basecaller hac {/path/to/reads.pod5} > calls.bam
+
+#chamada HAC com modificações 6mA e 5mC e 5hmC em CpG
+dorado basecaller hac,6mA,5mCG_5hmCG {/path/to/reads.pod5} > calls.bam
+```
+
+## `dorado` `basecaller`
+
+-   O padrão é salvar como `BAM`;
+
+    -   Isso vai permitir salvar as modificações de base;
+
+-   A performance ideal requer GPU;
+
+    -   Usar a tag `--device "cuda:all"`;
+
+-   Para gerar `fastq` usar `–emit-fastq`;
+
+-   Para novos modelos é necessário utilizar `–emit-moves`;
+
+-   É possível chamar e alinhar ao genoma de referência usando `--reference`;
+
+## `dorado` `basecaller`
+
+::: callout-note
+## Tempo de processamento
+
+\~ 12 horas de chamada de base + alinhamento utilizando GPU RTX 4060;
+
+`{model}` precisa ser o caminho completo;
+
+```{bash eval=FALSE, echo=TRUE}
+dorado basecaller --recursive --trim "all" --modified-bases 5mCG_5hmCG 6mA --reference {fasta} {modelo} pod5/ --device "cuda:all" > calls.bam
+```
+:::
+
+## QC
+
+-   `FASTQC` tambem funciona;
+
+-   `NanoPack2` é a atual melhor opção;
+
+    -   `NanoPlot` para visualização das estatísticas;
+
+    -   `Chopper` para trimagem (FASTQ);
+
+## NanoPlot
+
+-   FASTQ ou BAM;
+
+-   Qualidade (`Q`);
+
+-   Tamanho (`L`);
+
+-   N50;
+
+[![](https://hoytpr.github.io/bioinformatics-semester/fig/N50.png){fig-align="center" width="615"}](https://hoytpr.github.io/bioinformatics-semester/materials/genomics-assembly-reporting/)
+
+## NanoPlot
+
+```{bash eval=FALSE, echo=TRUE}
+NanoPlot -t {threads} {--fastq/--bam} {files} -o {OUTPUT_DIR_NAME}
+```
+
+![Exemplo de gráfico](https://github.com/wdecoster/NanoPlot/raw/master/examples/scaled_Log_Downsampled_LengthvsQualityScatterPlot_kde.png){fig-align="center" width="850"}
+
+## Chopper
+
+```{bash eval=FALSE, echo=TRUE}
+chopper -q 20 -l 1000 reads.fastq > trimmed_reads.fastq 
+```
+
+## Samtools
+
+-   Filtrar o bam usando samtools (v1.17+):
+
+```{bash eval=FALSE, echo=TRUE}
+samtools view \
+    --threads 16 \
+    --bam --with-header \
+    --min-qlen 500 \
+    --min-MQ 10 \
+    --exclude-flags 260 \
+    --expr "avg(qual) >= 20 && qlen >= 1000" \
+    {infile} > {outfile}
+```
+
+## Variantes
+
+[![Variantes.](https://www.genome.gov/sites/default/files/inline-images/Genomic%20variation_INDELS%20DEL%20SNV%20TANDEM.png){fig-align="center" width="1000"}](https://www.genome.gov/about-genomics/educational-resources/fact-sheets/human-genomic-variation)
+
+## Diferentes softwares
+
+-   GATK;
+
+-   DeepVariant;
+
+-   Freebayes;
+
+-   clair3;
+
+-   samtools + Picard;
+
+-   Entre outros...
+
+## `freebayes`
+
+-   Modelagem bayesiana;
+
+-   Monta pequenos haplótipos;
+
+-   Criado para short-reads;
+
+-   Propenso a erros do tipo 1 (Falsos positivos);
+
+-   Pode ser usado para uma ou várias amostras;
+
+## Comando `freebayes`
+
+```{bash eval=FALSE, echo=TRUE}
+# Uma amostra
+freebayes -f {REF} -t {REGIONS.BED} {amostra.bam} > var.vcf
+
+# Multisample focando em uma região
+ls *.bam > BAM_LIST.txt
+freebayes -f {REF} -L {BAM_LIST.txt} -t {REGIONS.BED} > var.vcf
+```

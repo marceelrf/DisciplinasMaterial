@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.39">
 
   <meta name="author" content="Marcel Ferreira">
-  <meta name="dcterms.date" content="2025-09-23">
+  <meta name="dcterms.date" content="2025-09-25">
   <title>Sequenciamento de Terceira Geração com Oxford Nanopore</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="bioinfo-nanopore_files/libs/revealjs/dist/theme/quarto-423d414d36ce366a9d05f36d06304417.css">
   <link href="bioinfo-nanopore_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -142,7 +207,7 @@ Marcel Ferreira
 </div>
 </div>
 
-  <p class="date">2025-09-23</p>
+  <p class="date">2025-09-25</p>
 </section>
 <section id="bioinformática" class="slide level2">
 <h2>Bioinformática</h2>
@@ -165,8 +230,248 @@ Marcel Ferreira
 <section id="oxford-nanopore" class="slide level2">
 <h2>Oxford Nanopore</h2>
 
-
 <img data-src="images/ont_prinmods.png" width="1250" class="r-stretch quarto-figure-center"><p class="caption">Principio do sequenciamento ONT</p></section>
+<section id="oxford-nanopore-1" class="slide level2">
+<h2>Oxford Nanopore</h2>
+</section>
+<section id="fluxograma" class="slide level2">
+<h2>Fluxograma</h2>
+
+<img data-src="Mermaid%20Chart%20-%20Create%20complex,%20visual%20diagrams%20with%20text.%20A%20smarter%20way%20of%20creating%20diagrams.-2025-07-23-163425.svg" width="1150" class="r-stretch quarto-figure-center"><p class="caption">Bioinformatics Pipeline</p></section>
+<section id="basecalling" class="slide level2">
+<h2>Basecalling</h2>
+<ul>
+<li><p>Procedimento no qual o sinal elétrico (<code>.pod5</code>) é convertido em bases (<code>.fastq</code> | <code>.bam</code>);</p></li>
+<li><p>Momento crucial onde se define o perfil da análise que será realizada;</p></li>
+<li><p>Erros aqui prejudicam todas as demais análises;</p></li>
+<li><p><code>Dorado</code>;</p></li>
+</ul>
+</section>
+<section id="basecalling---dorado" class="slide level2">
+<h2>Basecalling - <code>Dorado</code></h2>
+<ul>
+<li>Contem diversos modelos:
+<ul>
+<li>chamada de bases;</li>
+<li>modificação de bases;</li>
+<li>polimento;</li>
+<li>variantes;</li>
+</ul></li>
+</ul>
+</section>
+<section id="comando-dorado" class="slide level2">
+<h2>Comando <code>dorado</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="op">&gt;</span> dorado <span class="ex">--help</span></span>
+<span id="cb1-2"><a href=""></a><span class="ex">Usage:</span> dorado <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> subcommand</span>
+<span id="cb1-3"><a href=""></a></span>
+<span id="cb1-4"><a href=""></a><span class="ex">Positional</span> arguments:</span>
+<span id="cb1-5"><a href=""></a><span class="ex">aligner</span></span>
+<span id="cb1-6"><a href=""></a><span class="ex">basecaller</span></span>
+<span id="cb1-7"><a href=""></a><span class="ex">correct</span></span>
+<span id="cb1-8"><a href=""></a><span class="ex">demux</span></span>
+<span id="cb1-9"><a href=""></a><span class="ex">download</span></span>
+<span id="cb1-10"><a href=""></a><span class="ex">duplex</span></span>
+<span id="cb1-11"><a href=""></a><span class="ex">summary</span></span>
+<span id="cb1-12"><a href=""></a><span class="ex">trim</span></span>
+<span id="cb1-13"><a href=""></a></span>
+<span id="cb1-14"><a href=""></a><span class="ex">Optional</span> arguments:</span>
+<span id="cb1-15"><a href=""></a><span class="ex">-h</span> <span class="at">--help</span>               shows help message and exits</span>
+<span id="cb1-16"><a href=""></a><span class="ex">-v</span> <span class="at">--version</span>            prints version information and exits</span>
+<span id="cb1-17"><a href=""></a><span class="ex">-vv</span>                     prints verbose version information and exits</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="qual-modelo-usar" class="slide level2">
+<h2>Qual modelo usar?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">{analyte}_{pore}_{chemistry}_{speed}@version</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p><code>analyte</code>: DNA ou RNA?</p></li>
+<li><p><code>pore</code>: Qual técnologia de poro? (<code>R10.4.1</code>/<code>R9.4.1</code>)</p></li>
+<li><p><code>chemistry</code>: Qual kit foi utilizado foi utilizado?</p></li>
+<li><p><code>speed</code>: Velocidade de leitura durante o sequenciamento (DNA 400bps)</p></li>
+<li><p><code>version</code>: Versão do modelo</p></li>
+</ul>
+</section>
+<section id="modelos-dorado" class="slide level2">
+<h2>Modelos <code>dorado</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="co"># Ver os modelos disponíveis</span></span>
+<span id="cb3-2"><a href=""></a><span class="ex">dorado</span> download <span class="at">--list</span></span>
+<span id="cb3-3"><a href=""></a></span>
+<span id="cb3-4"><a href=""></a><span class="co"># Baixar o desejado na pasta desejada</span></span>
+<span id="cb3-5"><a href=""></a><span class="ex">dorado</span> download <span class="at">--model</span> {modelo} <span class="at">--models-directory</span> {PATH}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modelos-dorado-1" class="slide level2">
+<h2>Modelos <code>dorado</code></h2>
+<ul>
+<li><p><code>FAST</code>: Mais rápido e com menor acurácia;</p></li>
+<li><p><code>HAC</code>: Alta acurácia;</p></li>
+<li><p><code>SUP</code>: Super acurácia (maior requisito computacional);</p></li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Para escolher seu modelo.</strong></p>
+</div>
+<div class="callout-content">
+<p>Modelo <code>SUP</code> é uma vantagem em situações de construção de genomas de referência;</p>
+<p>Para demais situações o <code>HAC</code> já é suficiente;</p>
+</div>
+</div>
+</div>
+</section>
+<section id="dorado-basecaller" class="slide level2">
+<h2><code>dorado</code> <code>basecaller</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="co"># chamada HAC sem modificações</span></span>
+<span id="cb4-2"><a href=""></a><span class="ex">dorado</span> basecaller hac {/path/to/reads.pod5} <span class="op">&gt;</span> calls.bam</span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a><span class="co">#chamada HAC com modificações 6mA e 5mC e 5hmC em CpG</span></span>
+<span id="cb4-5"><a href=""></a><span class="ex">dorado</span> basecaller hac,6mA,5mCG_5hmCG {/path/to/reads.pod5} <span class="op">&gt;</span> calls.bam</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="dorado-basecaller-1" class="slide level2">
+<h2><code>dorado</code> <code>basecaller</code></h2>
+<ul>
+<li><p>O padrão é salvar como <code>BAM</code>;</p>
+<ul>
+<li>Isso vai permitir salvar as modificações de base;</li>
+</ul></li>
+<li><p>A performance ideal requer GPU;</p>
+<ul>
+<li>Usar a tag <code>--device "cuda:all"</code>;</li>
+</ul></li>
+<li><p>Para gerar <code>fastq</code> usar <code>–emit-fastq</code>;</p></li>
+<li><p>Para novos modelos é necessário utilizar <code>–emit-moves</code>;</p></li>
+<li><p>É possível chamar e alinhar ao genoma de referência usando <code>--reference</code>;</p></li>
+</ul>
+</section>
+<section id="dorado-basecaller-2" class="slide level2">
+<h2><code>dorado</code> <code>basecaller</code></h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tempo de processamento</strong></p>
+</div>
+<div class="callout-content">
+<p>~ 12 horas de chamada de base + alinhamento utilizando GPU RTX 4060;</p>
+<p><code>{model}</code> precisa ser o caminho completo;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="ex">dorado</span> basecaller <span class="at">--recursive</span> <span class="at">--trim</span> <span class="st">"all"</span> <span class="at">--modified-bases</span> 5mCG_5hmCG 6mA <span class="at">--reference</span> {fasta} {modelo} pod5/ <span class="at">--device</span> <span class="st">"cuda:all"</span> <span class="op">&gt;</span> calls.bam</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="qc" class="slide level2">
+<h2>QC</h2>
+<ul>
+<li><p><code>FASTQC</code> tambem funciona;</p></li>
+<li><p><code>NanoPack2</code> é a atual melhor opção;</p>
+<ul>
+<li><p><code>NanoPlot</code> para visualização das estatísticas;</p></li>
+<li><p><code>Chopper</code> para trimagem (FASTQ);</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="nanoplot" class="slide level2">
+<h2>NanoPlot</h2>
+<ul>
+<li><p>FASTQ ou BAM;</p></li>
+<li><p>Qualidade (<code>Q</code>);</p></li>
+<li><p>Tamanho (<code>L</code>);</p></li>
+<li><p>N50;</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://hoytpr.github.io/bioinformatics-semester/materials/genomics-assembly-reporting/"><img data-src="https://hoytpr.github.io/bioinformatics-semester/fig/N50.png" class="quarto-figure quarto-figure-center" width="615"></a></p>
+</figure>
+</div>
+</section>
+<section id="nanoplot-1" class="slide level2">
+<h2>NanoPlot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="ex">NanoPlot</span> <span class="at">-t</span> {threads} {--fastq/--bam} {files} <span class="at">-o</span> {OUTPUT_DIR_NAME}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="https://github.com/wdecoster/NanoPlot/raw/master/examples/scaled_Log_Downsampled_LengthvsQualityScatterPlot_kde.png" width="850" class="r-stretch quarto-figure-center"><p class="caption">Exemplo de gráfico</p></section>
+<section id="chopper" class="slide level2">
+<h2>Chopper</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="ex">chopper</span> <span class="at">-q</span> 20 <span class="at">-l</span> 1000 reads.fastq <span class="op">&gt;</span> trimmed_reads.fastq </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="samtools" class="slide level2">
+<h2>Samtools</h2>
+<ul>
+<li>Filtrar o bam usando samtools (v1.17+):</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">samtools</span> view <span class="dt">\</span></span>
+<span id="cb8-2"><a href=""></a>    <span class="at">--threads</span> 16 <span class="dt">\</span></span>
+<span id="cb8-3"><a href=""></a>    <span class="at">--bam</span> <span class="at">--with-header</span> <span class="dt">\</span></span>
+<span id="cb8-4"><a href=""></a>    <span class="at">--min-qlen</span> 500 <span class="dt">\</span></span>
+<span id="cb8-5"><a href=""></a>    <span class="at">--min-MQ</span> 10 <span class="dt">\</span></span>
+<span id="cb8-6"><a href=""></a>    <span class="at">--exclude-flags</span> 260 <span class="dt">\</span></span>
+<span id="cb8-7"><a href=""></a>    <span class="at">--expr</span> <span class="st">"avg(qual) &gt;= 20 &amp;&amp; qlen &gt;= 1000"</span> <span class="dt">\</span></span>
+<span id="cb8-8"><a href=""></a>    {infile} <span class="op">&gt;</span> {outfile}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="variantes" class="slide level2">
+<h2>Variantes</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://www.genome.gov/about-genomics/educational-resources/fact-sheets/human-genomic-variation"><img data-src="https://www.genome.gov/sites/default/files/inline-images/Genomic%20variation_INDELS%20DEL%20SNV%20TANDEM.png" class="quarto-figure quarto-figure-center" width="1000" alt="Variantes."></a></p>
+</figure>
+</div>
+<figcaption>Variantes.</figcaption>
+</figure>
+</div>
+</section>
+<section id="diferentes-softwares" class="slide level2">
+<h2>Diferentes softwares</h2>
+<ul>
+<li><p>GATK;</p></li>
+<li><p>DeepVariant;</p></li>
+<li><p>Freebayes;</p></li>
+<li><p>clair3;</p></li>
+<li><p>samtools + Picard;</p></li>
+<li><p>Entre outros…</p></li>
+</ul>
+</section>
+<section id="freebayes" class="slide level2">
+<h2><code>freebayes</code></h2>
+<ul>
+<li><p>Modelagem bayesiana;</p></li>
+<li><p>Monta pequenos haplótipos;</p></li>
+<li><p>Criado para short-reads;</p></li>
+<li><p>Propenso a erros do tipo 1 (Falsos positivos);</p></li>
+<li><p>Pode ser usado para uma ou várias amostras;</p></li>
+</ul>
+</section>
+<section id="comando-freebayes" class="slide level2">
+<h2>Comando <code>freebayes</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="co"># Uma amostra</span></span>
+<span id="cb9-2"><a href=""></a><span class="ex">freebayes</span> <span class="at">-f</span> {REF} <span class="at">-t</span> {REGIONS.BED} {amostra.bam} <span class="op">&gt;</span> var.vcf</span>
+<span id="cb9-3"><a href=""></a></span>
+<span id="cb9-4"><a href=""></a><span class="co"># Multisample focando em uma região</span></span>
+<span id="cb9-5"><a href=""></a><span class="fu">ls</span> <span class="pp">*</span>.bam <span class="op">&gt;</span> BAM_LIST.txt</span>
+<span id="cb9-6"><a href=""></a><span class="ex">freebayes</span> <span class="at">-f</span> {REF} <span class="at">-L</span> {BAM_LIST.txt} <span class="at">-t</span> {REGIONS.BED} <span class="op">&gt;</span> var.vcf</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
