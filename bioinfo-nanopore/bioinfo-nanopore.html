@@ -479,8 +479,135 @@ Marcel Ferreira
 <p><img data-src="freebayes_sw.png" class="quarto-figure quarto-figure-center" width="1000"></p>
 </figure>
 </div>
-
 </div>
+</section>
+<section id="freebayes-não-é-paralelizavel-1" class="slide level2">
+<h2><code>freebayes</code> não é paralelizavel</h2>
+<p>Parametros já testados:</p>
+<ul>
+<li><p>Windows = 1000 bp;</p></li>
+<li><p>Overlap = 50 bp;</p></li>
+<li><p>Step size = 950 bp (1000 - 50);</p></li>
+</ul>
+</section>
+<section id="combinando-todos-os-arquivos" class="slide level2">
+<h2>Combinando todos os arquivos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="cf">for</span> file <span class="kw">in</span> path/to/data/<span class="pp">*</span>.vcf<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb10-2"><a href=""></a>    <span class="ex">bgzip</span> <span class="at">-c</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$file</span><span class="st">.gz"</span></span>
+<span id="cb10-3"><a href=""></a>    <span class="ex">tabix</span> <span class="at">-p</span> vcf <span class="st">"</span><span class="va">$file</span><span class="st">.gz"</span></span>
+<span id="cb10-4"><a href=""></a><span class="cf">done</span></span>
+<span id="cb10-5"><a href=""></a></span>
+<span id="cb10-6"><a href=""></a></span>
+<span id="cb10-7"><a href=""></a><span class="ex">bcftools</span> concat <span class="at">--threads</span> 14 <span class="at">--allow-overlaps</span> <span class="at">--remove-duplicates</span> <span class="at">-o</span> ../merged.vcf.gz <span class="at">-Oz</span> <span class="va">$(</span><span class="fu">ls</span> <span class="pp">*</span>.vcf.gz<span class="va">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="filtrando-arquivos-vcf" class="slide level2">
+<h2>Filtrando arquivos VCF</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="co"># remove variantes de qualidade menor que 1</span></span>
+<span id="cb11-2"><a href=""></a><span class="ex">bcftools</span> view <span class="at">--exclude</span> <span class="st">'QUAL&lt;1'</span> variantes.vcf <span class="op">&gt;</span> variantes_filtradas.vcf</span>
+<span id="cb11-3"><a href=""></a></span>
+<span id="cb11-4"><a href=""></a><span class="co"># quebra os alelos alternativos em várias linhas</span></span>
+<span id="cb11-5"><a href=""></a><span class="ex">bcftools</span> view <span class="at">--trim-alt-alleles</span> variantes_filtradas.vcf <span class="op">&gt;</span> variantes_filtradas_trim.vcf</span>
+<span id="cb11-6"><a href=""></a></span>
+<span id="cb11-7"><a href=""></a><span class="co"># remove variantes que não tenham nenhum alelo alternativo nas amostras</span></span>
+<span id="cb11-8"><a href=""></a><span class="ex">bcftools</span> view <span class="at">--min-ac</span> 1 variantes_filtradas_trim.vcf <span class="op">&gt;</span> variantes_filtradas_trim_minac.vcf</span>
+<span id="cb11-9"><a href=""></a></span>
+<span id="cb11-10"><a href=""></a><span class="co"># normaliza o vcf com base no genoma de referência</span></span>
+<span id="cb11-11"><a href=""></a><span class="ex">bcftools</span> norm <span class="at">-f</span> hg38.fa variantes_filtradas_trim_minac.vcf <span class="op">&gt;</span> variantes_filtradas_trim_minac_norm.vcf</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="clair3" class="slide level2">
+<h2><code>clair3</code></h2>
+<ul>
+<li><p>Desenhada para dados de diferentes plataformas;</p>
+<ul>
+<li>ONT, PacBio, Illumina;</li>
+</ul></li>
+<li><p>Usa deep learning;</p></li>
+<li><p>Modos <code>pileup</code> e <code>full aligment</code> (<code>merge</code> combinação);</p></li>
+<li><p>Roda uma amostra por vez;</p>
+<ul>
+<li><code>--gvcf</code>;</li>
+</ul></li>
+</ul>
+</section>
+<section id="comando-clair3" class="slide level2">
+<h2>Comando <code>clair3</code></h2>
+<ul>
+<li>Usando <code>bioconda</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="va">MODEL_NAME</span><span class="op">=</span><span class="st">"[YOUR_MODEL_NAME]"</span>         <span class="co"># e.g. r1041_e82_400bps_sup_v500</span></span>
+<span id="cb12-2"><a href=""></a><span class="va">THREADS</span><span class="op">=</span>4</span>
+<span id="cb12-3"><a href=""></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"ondesalvar"</span></span>
+<span id="cb12-4"><a href=""></a><span class="ex">run_clair3.sh</span> <span class="dt">\</span></span>
+<span id="cb12-5"><a href=""></a>  <span class="at">--bam_fn</span><span class="op">=</span>input.bam <span class="dt">\ </span>                <span class="co">## change your bam file name here</span></span>
+<span id="cb12-6"><a href=""></a>  <span class="ex">--ref_fn=ref.fa</span> <span class="dt">\ </span>                   <span class="co">## change your reference file name here</span></span>
+<span id="cb12-7"><a href=""></a>  <span class="ex">--threads=</span><span class="va">${THREADS}</span> <span class="dt">\ </span>              <span class="co">## maximum threads to be used</span></span>
+<span id="cb12-8"><a href=""></a>  <span class="ex">--platform=</span><span class="st">"ont"</span> <span class="dt">\ </span>                  <span class="co">## options: {ont,hifi,ilmn}</span></span>
+<span id="cb12-9"><a href=""></a>  <span class="ex">--model_path=</span><span class="st">"</span><span class="va">${CONDA_PREFIX}</span><span class="st">/bin/models/</span><span class="va">${MODEL_NAME}</span><span class="st">"</span> <span class="dt">\ </span></span>
+<span id="cb12-10"><a href=""></a>  <span class="ex">--output=</span><span class="va">${OUTPUT_DIR}</span> <span class="dt">\ </span>             <span class="co">## output path prefix </span></span>
+<span id="cb12-11"><a href=""></a>  <span class="ex">--sample_name=</span><span class="st">"nomedaamostra"</span> <span class="dt">\</span></span>
+<span id="cb12-12"><a href=""></a>  <span class="at">--gvcf</span> <span class="dt">\</span></span>
+<span id="cb12-13"><a href=""></a>  <span class="at">--bed_fn</span><span class="op">=</span> <span class="st">"genes_disciplina.bed"</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="multi-amostras" class="slide level2">
+<h2>Multi amostras</h2>
+<ul>
+<li><p><code>GLnexus</code>;</p></li>
+<li><p>Modelo para usar [<a href="http://www.bio8.cs.hku.hk/clair3_trio/config/clair3.yml">link</a>];</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="co"># rodar o glnexus para juntar as amostras</span></span>
+<span id="cb13-2"><a href=""></a><span class="ex">glnexus_cli</span> <span class="at">--config</span> {clair3.yml} <span class="at">--threads</span> 12 [1.gvcf, 2.gvcf, 3.gvcf...] <span class="op">&gt;</span> all_samples.bcf</span>
+<span id="cb13-3"><a href=""></a></span>
+<span id="cb13-4"><a href=""></a><span class="co"># transformar em vcf</span></span>
+<span id="cb13-5"><a href=""></a><span class="ex">bcftools</span> view <span class="at">-Ov</span> <span class="at">-o</span> all_samples.vcf all_samples.bcf</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="variantes-estruturais-sv" class="slide level2">
+<h2>Variantes estruturais (SV)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://www.genome.gov/about-genomics/educational-resources/fact-sheets/human-genomic-variation"><img data-src="https://www.genome.gov/sites/default/files/inline-images/Genomic%20variation_Structral%20variants.png" class="quarto-figure quarto-figure-center" width="1000" alt="Variantes estruturais."></a></p>
+</figure>
+</div>
+<figcaption>Variantes estruturais.</figcaption>
+</figure>
+</div>
+</section>
+<section id="programas" class="slide level2">
+<h2>Programas</h2>
+<ul>
+<li>Sniffles2;</li>
+</ul>
+<p><br></p>
+<ul>
+<li>SVIM;</li>
+</ul>
+<p><br></p>
+<ul>
+<li><a href="https://github.com/tjiangHIT/cuteSV">cuteSV</a>;</li>
+</ul>
+</section>
+<section id="sniffles2" class="slide level2">
+<h2>Sniffles2</h2>
+<ul>
+<li>Permite análise de TRIOS (Pais e filhos), populações (multiplas amostras) e mosaico;</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="co"># Padrão</span></span>
+<span id="cb14-2"><a href=""></a><span class="ex">sniffles</span> <span class="at">--input</span> {amostra.bam} <span class="at">--snf</span> {amostra.snf} <span class="at">--vcf</span> {amostra.vcf}</span>
+<span id="cb14-3"><a href=""></a></span>
+<span id="cb14-4"><a href=""></a><span class="co">#Multisample</span></span>
+<span id="cb14-5"><a href=""></a><span class="ex">sniffles</span> <span class="at">--input</span> {amostra1.snf} {amostra2.snf} ... <span class="at">--vcf</span> {todasamostra.vcf}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">

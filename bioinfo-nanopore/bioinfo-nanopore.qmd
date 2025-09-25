@@ -357,3 +357,32 @@ glnexus_cli --config {clair3.yml} --threads 12 [1.gvcf, 2.gvcf, 3.gvcf...] > all
 # transformar em vcf
 bcftools view -Ov -o all_samples.vcf all_samples.bcf
 ```
+
+## Variantes estruturais (SV)
+
+[![Variantes estruturais.](https://www.genome.gov/sites/default/files/inline-images/Genomic%20variation_Structral%20variants.png){fig-align="center" width="1000"}](https://www.genome.gov/about-genomics/educational-resources/fact-sheets/human-genomic-variation)
+
+## Programas
+
+-   Sniffles2;
+
+<br>
+
+-   SVIM;
+
+<br>
+
+-   [cuteSV](https://github.com/tjiangHIT/cuteSV);
+
+## Sniffles2
+
+-   Permite análise de TRIOS (Pais e filhos), populações (multiplas amostras) e mosaico;
+
+```{bash eval=FALSE, echo=TRUE}
+# Padrão
+sniffles --input {amostra.bam} --snf {amostra.snf} --vcf {amostra.vcf}
+
+#Multisample
+sniffles --input {amostra1.snf} {amostra2.snf} ... --vcf {todasamostra.vcf}
+```
+
