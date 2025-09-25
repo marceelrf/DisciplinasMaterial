@@ -48,7 +48,7 @@ NIH: National Institute of Health
 
 ## Fluxograma
 
-![Bioinformatics Pipeline](Mermaid Chart - Create complex, visual diagrams with text. A smarter way of creating diagrams.-2025-07-23-163425.svg){fig-align="center" width="1150"}
+![Bioinformatics Pipeline](Mermaid%20Chart%20-%20Create%20complex,%20visual%20diagrams%20with%20text.%20A%20smarter%20way%20of%20creating%20diagrams.-2025-07-23-163425.svg){fig-align="center" width="1150"}
 
 ## Basecalling
 
@@ -262,4 +262,98 @@ freebayes -f {REF} -t {REGIONS.BED} {amostra.bam} > var.vcf
 # Multisample focando em uma região
 ls *.bam > BAM_LIST.txt
 freebayes -f {REF} -L {BAM_LIST.txt} -t {REGIONS.BED} > var.vcf
+```
+
+## `freebayes` não é paralelizavel
+
+. . .
+
+![](freebayes_sw.png){fig-align="center" width="1000"}
+
+## `freebayes` não é paralelizavel
+
+Parametros já testados:
+
+-   Windows = 1000 bp;
+
+-   Overlap = 50 bp;
+
+-   Step size = 950 bp (1000 - 50);
+
+## Combinando todos os arquivos
+
+```{bash eval=FALSE, echo=TRUE}
+for file in path/to/data/*.vcf; do
+    bgzip -c "$file" > "$file.gz"
+    tabix -p vcf "$file.gz"
+done
+
+
+bcftools concat --threads 14 --allow-overlaps --remove-duplicates -o ../merged.vcf.gz -Oz $(ls *.vcf.gz)
+```
+
+
+
+## Filtrando arquivos VCF
+
+```{bash eval=FALSE, echo=TRUE}
+# remove variantes de qualidade menor que 1
+bcftools view --exclude 'QUAL<1' variantes.vcf > variantes_filtradas.vcf
+
+# quebra os alelos alternativos em várias linhas
+bcftools view --trim-alt-alleles variantes_filtradas.vcf > variantes_filtradas_trim.vcf
+
+# remove variantes que não tenham nenhum alelo alternativo nas amostras
+bcftools view --min-ac 1 variantes_filtradas_trim.vcf > variantes_filtradas_trim_minac.vcf
+
+# normaliza o vcf com base no genoma de referência
+bcftools norm -f hg38.fa variantes_filtradas_trim_minac.vcf > variantes_filtradas_trim_minac_norm.vcf
+```
+
+## `clair3`
+
+-   Desenhada para dados de diferentes plataformas;
+
+    -   ONT, PacBio, Illumina;
+
+-   Usa deep learning;
+
+-   Modos `pileup` e `full aligment` (`merge` combinação);
+
+-   Roda uma amostra por vez;
+
+    -   `--gvcf`;
+
+## Comando `clair3`
+
+-   Usando `bioconda`:
+
+```{bash eval=FALSE, echo=TRUE}
+MODEL_NAME="[YOUR_MODEL_NAME]"         # e.g. r1041_e82_400bps_sup_v500
+THREADS=4
+OUTPUT_DIR="ondesalvar"
+run_clair3.sh \
+  --bam_fn=input.bam \                 ## change your bam file name here
+  --ref_fn=ref.fa \                    ## change your reference file name here
+  --threads=${THREADS} \               ## maximum threads to be used
+  --platform="ont" \                   ## options: {ont,hifi,ilmn}
+  --model_path="${CONDA_PREFIX}/bin/models/${MODEL_NAME}" \ 
+  --output=${OUTPUT_DIR} \              ## output path prefix 
+  --sample_name="nomedaamostra" \
+  --gvcf \
+  --bed_fn= "genes_disciplina.bed"
+```
+
+## Multi amostras
+
+-   `GLnexus`;
+
+-   Modelo para usar \[[link](http://www.bio8.cs.hku.hk/clair3_trio/config/clair3.yml)\];
+
+```{bash eval=FALSE, echo=TRUE}
+# rodar o glnexus para juntar as amostras
+glnexus_cli --config {clair3.yml} --threads 12 [1.gvcf, 2.gvcf, 3.gvcf...] > all_samples.bcf
+
+# transformar em vcf
+bcftools view -Ov -o all_samples.vcf all_samples.bcf
 ```
