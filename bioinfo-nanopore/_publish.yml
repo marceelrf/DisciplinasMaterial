@@ -1,0 +1,4 @@
+- source: bioinfo-nanopore.qmd
+  quarto-pub:
+    - id: ee766c35-2076-49a3-b98c-e3329b813343
+      url: https://marceelrf.quarto.pub/nanopore-bioinfo-pipeline

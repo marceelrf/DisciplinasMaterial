@@ -292,15 +292,13 @@ done
 bcftools concat --threads 14 --allow-overlaps --remove-duplicates -o ../merged.vcf.gz -Oz $(ls *.vcf.gz)
 ```
 
-
-
 ## Filtrando arquivos VCF
 
 ```{bash eval=FALSE, echo=TRUE}
 # remove variantes de qualidade menor que 1
 bcftools view --exclude 'QUAL<1' variantes.vcf > variantes_filtradas.vcf
 
-# quebra os alelos alternativos em várias linhas
+# remove alelos alternativos que não apareceram
 bcftools view --trim-alt-alleles variantes_filtradas.vcf > variantes_filtradas_trim.vcf
 
 # remove variantes que não tenham nenhum alelo alternativo nas amostras
@@ -386,3 +384,118 @@ sniffles --input {amostra.bam} --snf {amostra.snf} --vcf {amostra.vcf}
 sniffles --input {amostra1.snf} {amostra2.snf} ... --vcf {todasamostra.vcf}
 ```
 
+## Faseamento
+
+[![Vantagens no faseamento](https://wp.unil.ch/gtf/files/2020/05/EtNR1T.png){fig-align="center"}](https://wp.unil.ch/gtf/applications/)
+
+## Programas
+
+-   [WhatsHap](https://whatshap.readthedocs.io/en/latest/);
+
+<br>
+
+-   [Longphase](https://github.com/twolinin/longphase);
+
+<br>
+
+-   [HapCUT2](https://github.com/vibansal/HapCUT2);
+
+## WhatsHap
+
+-   Permite trabalhar com \>1 amostra no vcf;
+
+-   Não lida com variantes multialelicas;
+
+-   Não lida com SVs;
+
+```{bash eval=FALSE, echo=TRUE}
+# Phase
+whatshap phase --indels -o phased.vcf --reference=reference.fasta input.vcf input.bam
+
+#Haplotag
+whatshap haplotag -o haplotagged.bam --reference reference.fasta phased.vcf.gz alignments.bam
+```
+
+## Longphase
+
+-   Permite apenas 1 amostra por vcf;
+
+-   Suporta com SVs;
+
+-   É capaz de utilizar a metilação para a fase;
+
+```{bash eval=FALSE, echo=TRUE}
+# Phase. --sv-file passa o vcf de SVs
+longphase phase -s SNP.vcf -b alignment.bam -r reference.fasta -t 8  -o phased_prefix --indels --ont
+
+# Haplotag 
+longphase haplotag -r reference.fasta -s phased_snp.vcf --sv-file phased_sv.vcf -b alignment.bam -t 8 -o tagged_bam_prefix
+```
+
+### **Montadores de nova geração:**
+
+-   **Shasta**: algoritmo de grafo string, extremamente rápido;
+
+-   **Verkko**: híbrido ONT+HiFi, qualidade superior;
+
+-   **Hifiasm**: originalmente para HiFi, adaptado para ONT;
+
+-   **PECAT:** versátil, realiza correção e polimento;
+
+## Programas
+
+-   [PECAT](https://github.com/lemene/PECAT);
+
+<br>
+
+-   [Hifiasm](https://github.com/chhylp123/hifiasm);
+
+## PECAT
+
+-   Coleção de ferramentas;
+
+-   minimap2;
+
+-   clair3;
+
+-   medaka;
+
+## PECAT
+
+![](pecat01.png){fig-align="center"}
+
+## PECAT
+
+```{bash eval=FALSE, echo=TRUE}
+# Ver opções
+pecat.pl
+
+# Cria um arquivo texto com todos os parametros
+pecat.pl config {cfg_name}
+
+# Roda
+pecat.pl unzip {cfg_name}
+```
+
+## Hifiasm
+
+-   Desenhado para Hifi reads(PacBio), adaptado para ONT;
+
+-   Gerar grafos;
+
+-   Funciona para diploides;
+
+-   Rápido;
+
+## Alinhando os ctgs ao genoma de referencia
+
+```{bash eval=FALSE, echo=TRUE}
+#Juntar todos os ctgs num unico arquivo
+
+# minimap asm20
+minimap2 -t 10 -ax asm20 -B 2 -E 3,1 -O 6,100 --cs /path/to/genomes/reference.fasta OCA2_ctgs.fasta > OCA2_ctgs.sam
+
+# Transformar em bam
+samtools sort OCA2_ctgs.sam > OCA2_ctgs.bam
+samtools index OCA2_ctgs.bam
+```
