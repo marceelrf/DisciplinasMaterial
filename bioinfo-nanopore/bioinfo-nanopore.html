@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.39">
 
   <meta name="author" content="Marcel Ferreira">
-  <meta name="dcterms.date" content="2025-09-25">
+  <meta name="dcterms.date" content="2025-09-27">
   <title>Sequenciamento de Terceira Geração com Oxford Nanopore</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -207,7 +207,7 @@ Marcel Ferreira
 </div>
 </div>
 
-  <p class="date">2025-09-25</p>
+  <p class="date">2025-09-27</p>
 </section>
 <section id="bioinformática" class="slide level2">
 <h2>Bioinformática</h2>
@@ -508,7 +508,7 @@ Marcel Ferreira
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="co"># remove variantes de qualidade menor que 1</span></span>
 <span id="cb11-2"><a href=""></a><span class="ex">bcftools</span> view <span class="at">--exclude</span> <span class="st">'QUAL&lt;1'</span> variantes.vcf <span class="op">&gt;</span> variantes_filtradas.vcf</span>
 <span id="cb11-3"><a href=""></a></span>
-<span id="cb11-4"><a href=""></a><span class="co"># quebra os alelos alternativos em várias linhas</span></span>
+<span id="cb11-4"><a href=""></a><span class="co"># remove alelos alternativos que não apareceram</span></span>
 <span id="cb11-5"><a href=""></a><span class="ex">bcftools</span> view <span class="at">--trim-alt-alleles</span> variantes_filtradas.vcf <span class="op">&gt;</span> variantes_filtradas_trim.vcf</span>
 <span id="cb11-6"><a href=""></a></span>
 <span id="cb11-7"><a href=""></a><span class="co"># remove variantes que não tenham nenhum alelo alternativo nas amostras</span></span>
@@ -607,6 +607,219 @@ Marcel Ferreira
 <span id="cb14-4"><a href=""></a><span class="co">#Multisample</span></span>
 <span id="cb14-5"><a href=""></a><span class="ex">sniffles</span> <span class="at">--input</span> {amostra1.snf} {amostra2.snf} ... <span class="at">--vcf</span> {todasamostra.vcf}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="faseamento" class="slide level2">
+<h2>Faseamento</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://wp.unil.ch/gtf/applications/"><img data-src="https://wp.unil.ch/gtf/files/2020/05/EtNR1T.png" class="quarto-figure quarto-figure-center" alt="Vantagens no faseamento"></a></p>
+</figure>
+</div>
+<figcaption>Vantagens no faseamento</figcaption>
+</figure>
+</div>
+</section>
+<section id="programas-1" class="slide level2">
+<h2>Programas</h2>
+<ul>
+<li><a href="https://whatshap.readthedocs.io/en/latest/">WhatsHap</a>;</li>
+</ul>
+<p><br></p>
+<ul>
+<li><a href="https://github.com/twolinin/longphase">Longphase</a>;</li>
+</ul>
+<p><br></p>
+<ul>
+<li><a href="https://github.com/vibansal/HapCUT2">HapCUT2</a>;</li>
+</ul>
+</section>
+<section id="whatshap" class="slide level2">
+<h2>WhatsHap</h2>
+<ul>
+<li><p>Permite trabalhar com &gt;1 amostra no vcf;</p></li>
+<li><p>Não lida com variantes multialelicas;</p></li>
+<li><p>Não lida com SVs;</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="co"># Phase</span></span>
+<span id="cb15-2"><a href=""></a><span class="ex">whatshap</span> phase <span class="at">--indels</span> <span class="at">-o</span> phased.vcf <span class="at">--reference</span><span class="op">=</span>reference.fasta input.vcf input.bam</span>
+<span id="cb15-3"><a href=""></a></span>
+<span id="cb15-4"><a href=""></a><span class="co">#Haplotag</span></span>
+<span id="cb15-5"><a href=""></a><span class="ex">whatshap</span> haplotag <span class="at">-o</span> haplotagged.bam <span class="at">--reference</span> reference.fasta phased.vcf.gz alignments.bam</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="longphase" class="slide level2">
+<h2>Longphase</h2>
+<ul>
+<li><p>Permite apenas 1 amostra por vcf;</p></li>
+<li><p>Suporta com SVs;</p></li>
+<li><p>É capaz de utilizar a metilação para a fase;</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="co"># Phase. --sv-file passa o vcf de SVs</span></span>
+<span id="cb16-2"><a href=""></a><span class="ex">longphase</span> phase <span class="at">-s</span> SNP.vcf <span class="at">-b</span> alignment.bam <span class="at">-r</span> reference.fasta <span class="at">-t</span> 8  <span class="at">-o</span> phased_prefix <span class="at">--indels</span> <span class="at">--ont</span></span>
+<span id="cb16-3"><a href=""></a></span>
+<span id="cb16-4"><a href=""></a><span class="co"># Haplotag </span></span>
+<span id="cb16-5"><a href=""></a><span class="ex">longphase</span> haplotag <span class="at">-r</span> reference.fasta <span class="at">-s</span> phased_snp.vcf <span class="at">--sv-file</span> phased_sv.vcf <span class="at">-b</span> alignment.bam <span class="at">-t</span> 8 <span class="at">-o</span> tagged_bam_prefix</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="montagem-de-genomas" class="slide level2">
+<h2><strong>Montagem de genomas</strong></h2>
+<ul>
+<li><p><strong>Shasta</strong>: algoritmo de grafo string, extremamente rápido;</p></li>
+<li><p><strong>Verkko</strong>: híbrido ONT+HiFi, qualidade superior;</p></li>
+<li><p><strong>Hifiasm</strong>: originalmente para HiFi, adaptado para ONT;</p></li>
+<li><p><strong>PECAT:</strong> versátil, realiza correção e polimento;</p></li>
+</ul>
+</section>
+<section id="programas-2" class="slide level2">
+<h2>Programas</h2>
+<ul>
+<li><a href="https://github.com/lemene/PECAT">PECAT</a>;</li>
+</ul>
+<p><br></p>
+<ul>
+<li><a href="https://github.com/chhylp123/hifiasm">Hifiasm</a>;</li>
+</ul>
+</section>
+<section id="pecat" class="slide level2">
+<h2>PECAT</h2>
+<ul>
+<li><p>Coleção de ferramentas;</p></li>
+<li><p>minimap2;</p></li>
+<li><p>clair3;</p></li>
+<li><p>medaka;</p></li>
+</ul>
+</section>
+<section id="pecat-1" class="slide level2">
+<h2>PECAT</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://www.nature.com/articles/s41467-024-47349-7/figures/4"><img data-src="images/pecat.webp" class="quarto-figure quarto-figure-center" width="1350"></a></p>
+</figure>
+</div>
+</section>
+<section id="pecat-2" class="slide level2">
+<h2>PECAT</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href=""></a><span class="co"># Ver opções</span></span>
+<span id="cb17-2"><a href=""></a><span class="ex">pecat.pl</span></span>
+<span id="cb17-3"><a href=""></a></span>
+<span id="cb17-4"><a href=""></a><span class="co"># Cria um arquivo texto com todos os parametros</span></span>
+<span id="cb17-5"><a href=""></a><span class="ex">pecat.pl</span> config {cfg_name}</span>
+<span id="cb17-6"><a href=""></a></span>
+<span id="cb17-7"><a href=""></a><span class="co"># Roda</span></span>
+<span id="cb17-8"><a href=""></a><span class="ex">pecat.pl</span> unzip {cfg_name}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="hifiasm" class="slide level2">
+<h2>Hifiasm</h2>
+<ul>
+<li><p>Desenhado para Hifi reads(PacBio), adaptado para ONT;</p></li>
+<li><p>Gerar grafos;</p></li>
+<li><p>Funciona para diploides;</p></li>
+<li><p>Rápido;</p></li>
+</ul>
+</section>
+<section id="alinhando-os-ctgs-ao-genoma-de-referencia" class="slide level2">
+<h2>Alinhando os ctgs ao genoma de referencia</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href=""></a><span class="co">#Juntar todos os ctgs num unico arquivo</span></span>
+<span id="cb18-2"><a href=""></a></span>
+<span id="cb18-3"><a href=""></a><span class="co"># minimap asm20</span></span>
+<span id="cb18-4"><a href=""></a><span class="ex">minimap2</span> <span class="at">-t</span> 10 <span class="at">-ax</span> asm20 <span class="at">-B</span> 2 <span class="at">-E</span> 3,1 <span class="at">-O</span> 6,100 <span class="at">--cs</span> /path/to/genomes/reference.fasta OCA2_ctgs.fasta <span class="op">&gt;</span> OCA2_ctgs.sam</span>
+<span id="cb18-5"><a href=""></a></span>
+<span id="cb18-6"><a href=""></a><span class="co"># Transformar em bam</span></span>
+<span id="cb18-7"><a href=""></a><span class="ex">samtools</span> sort OCA2_ctgs.sam <span class="op">&gt;</span> OCA2_ctgs.bam</span>
+<span id="cb18-8"><a href=""></a><span class="ex">samtools</span> index OCA2_ctgs.bam</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modificação-de-bases" class="slide level2">
+<h2>Modificação de bases</h2>
+</section>
+<section id="modbam" class="slide level2">
+<h2>Modbam</h2>
+<p>- O produto de chamada de base é chamado de modbam. Embora a extensão seja <code>.bam</code>;</p>
+<p>- São adicionadas duas tags no bam contendo as informações de modificação: <code>MM</code> e <code>ML</code>;</p>
+<p>- <code>IGV</code>;</p>
+</section>
+<section id="modkit" class="slide level2">
+<h2>Modkit</h2>
+<ul>
+<li>Kit de ferramentas desenvolvida pela Oxford Nanopore Technologies;</li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Pipeline completo: desde BAM files até visualizações finais;</p></li>
+<li><p>Interface command-line intuitiva e <a href="https://nanoporetech.github.io/modkit/">bem documentada</a>;</p></li>
+</ul>
+</section>
+<section id="modkit-1" class="slide level2">
+<h2>Modkit</h2>
+<ul>
+<li><p><code>pileup</code>: Agregação de probabilidades de modificação por posição genômica;</p></li>
+<li><p><code>DMR</code>: Calculo de regiões diferencialmente metiladas;</p></li>
+<li><p><code>Entropy</code>: medida de heterogeneidade de modificação em população celular;</p></li>
+</ul>
+</section>
+<section id="modkit---pileup" class="slide level2">
+<h2>Modkit - pileup</h2>
+<ul>
+<li><p>Gera um bedmethyl como resultado;</p></li>
+<li><p>Pode ser para genoma completo o posições específicas;</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href=""></a><span class="co"># Pileup padrão</span></span>
+<span id="cb19-2"><a href=""></a><span class="ex">modkit</span> pileup path/to/reads.bam output/path/pileup.bed <span class="at">--cpg</span> <span class="at">--ref</span> path/to/reference.fasta</span>
+<span id="cb19-3"><a href=""></a></span>
+<span id="cb19-4"><a href=""></a><span class="co"># Pileup por região. Ex CpG</span></span>
+<span id="cb19-5"><a href=""></a><span class="ex">modkit</span> pileup path/to/reads.bam output/path/pileup.bed <span class="dt">\</span></span>
+<span id="cb19-6"><a href=""></a>  <span class="at">--cpg</span> <span class="dt">\</span></span>
+<span id="cb19-7"><a href=""></a>  <span class="at">--ref</span> path/to/reference.fasta <span class="dt">\</span></span>
+<span id="cb19-8"><a href=""></a>  <span class="at">--include-bed</span> path/to/my_cpgs.bed</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modkit---pileup-por-hp" class="slide level2">
+<h2>Modkit - pileup por HP</h2>
+<ul>
+<li>É possível analisar por haplótipo:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href=""></a><span class="ex">modkit</span> pileup path/to/reads.bam output/directory/ <span class="at">--cpg</span> <span class="at">--ref</span> <span class="op">&lt;</span>reference.fasta<span class="op">&gt;</span> --partition-tag HP <span class="at">--prefix</span> haplotyped</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modkit---dmr" class="slide level2">
+<h2>Modkit - DMR</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href=""></a><span class="co"># Gerar os pileups para as amostras individualmente</span></span>
+<span id="cb21-2"><a href=""></a></span>
+<span id="cb21-3"><a href=""></a><span class="co"># bgzip e tabix para os beds</span></span>
+<span id="cb21-4"><a href=""></a><span class="ex">bgzip</span> <span class="at">-k</span> <span class="va">${pileup}</span></span>
+<span id="cb21-5"><a href=""></a><span class="ex">tabix</span> <span class="at">-p</span> bed <span class="va">${pileup}</span>.gz</span>
+<span id="cb21-6"><a href=""></a></span>
+<span id="cb21-7"><a href=""></a><span class="co"># dmr pair para pares</span></span>
+<span id="cb21-8"><a href=""></a><span class="ex">modkit</span> dmr pair <span class="at">-a</span> {amostra1.bed.gz} <span class="at">-b</span> {amostra2.bed.gz} <span class="at">-o</span> {output_dir} <span class="at">-r</span> {regioes.bed} <span class="at">--ref</span> {genoma.fa} <span class="at">--base</span> C <span class="at">--threads</span> 10</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modkit---entropy" class="slide level2">
+<h2>Modkit - entropy</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href=""></a><span class="ex">modkit</span> entropy <span class="at">--in-bam</span> <span class="va">${mod_bam}</span> <span class="dt">\</span></span>
+<span id="cb22-2"><a href=""></a> <span class="at">-o</span> <span class="va">${output_directory}</span> <span class="dt">\</span></span>
+<span id="cb22-3"><a href=""></a> <span class="at">--regions</span> <span class="va">${regions_bed_file}</span> <span class="dt">\ </span> <span class="co"># BED3 or BED4 file of regions</span></span>
+<span id="cb22-4"><a href=""></a> <span class="ex">--cpg</span> <span class="dt">\ </span> <span class="co"># specify CpG dinucleotides and combine strands</span></span>
+<span id="cb22-5"><a href=""></a> <span class="ex">--ref</span> <span class="va">${ref}</span> <span class="dt">\</span></span>
+<span id="cb22-6"><a href=""></a> <span class="at">--threads</span> 10</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modkit---extras" class="slide level2">
+<h2>Modkit - extras</h2>
+<ul>
+<li><p><a href="https://nanoporetech.github.io/modkit/intro_localize.html">Localize</a></p></li>
+<li><p><a href="https://nanoporetech.github.io/modkit/intro_open_chromatin.html">Open Chromatin</a></p></li>
+</ul>
 
 </section>
     </div>

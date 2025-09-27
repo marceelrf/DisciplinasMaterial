@@ -432,7 +432,7 @@ longphase phase -s SNP.vcf -b alignment.bam -r reference.fasta -t 8  -o phased_p
 longphase haplotag -r reference.fasta -s phased_snp.vcf --sv-file phased_sv.vcf -b alignment.bam -t 8 -o tagged_bam_prefix
 ```
 
-### **Montadores de nova geração:**
+## **Montagem de genomas**
 
 -   **Shasta**: algoritmo de grafo string, extremamente rápido;
 
@@ -462,7 +462,7 @@ longphase haplotag -r reference.fasta -s phased_snp.vcf --sv-file phased_sv.vcf 
 
 ## PECAT
 
-![](pecat01.png){fig-align="center"}
+[![](images/pecat.webp){fig-align="center" width="1350"}](https://www.nature.com/articles/s41467-024-47349-7/figures/4)
 
 ## PECAT
 
@@ -499,3 +499,87 @@ minimap2 -t 10 -ax asm20 -B 2 -E 3,1 -O 6,100 --cs /path/to/genomes/reference.fa
 samtools sort OCA2_ctgs.sam > OCA2_ctgs.bam
 samtools index OCA2_ctgs.bam
 ```
+
+## Modificação de bases
+
+## Modbam
+
+\- O produto de chamada de base é chamado de modbam. Embora a extensão seja `.bam`;
+
+\- São adicionadas duas tags no bam contendo as informações de modificação: `MM` e `ML`;
+
+\- `IGV`;
+
+## Modkit
+
+-   Kit de ferramentas desenvolvida pela Oxford Nanopore Technologies;
+
+<!-- -->
+
+-   Pipeline completo: desde BAM files até visualizações finais;
+
+-   Interface command-line intuitiva e [bem documentada](https://nanoporetech.github.io/modkit/);
+
+## Modkit
+
+-   `pileup`: Agregação de probabilidades de modificação por posição genômica;
+
+-   `DMR`: Calculo de regiões diferencialmente metiladas;
+
+-   `Entropy`: medida de heterogeneidade de modificação em população celular;
+
+## Modkit - pileup
+
+-   Gera um bedmethyl como resultado;
+
+-   Pode ser para genoma completo o posições específicas;
+
+```{bash eval=FALSE, echo=TRUE}
+# Pileup padrão
+modkit pileup path/to/reads.bam output/path/pileup.bed --cpg --ref path/to/reference.fasta
+
+# Pileup por região. Ex CpG
+modkit pileup path/to/reads.bam output/path/pileup.bed \
+  --cpg \
+  --ref path/to/reference.fasta \
+  --include-bed path/to/my_cpgs.bed
+```
+
+## Modkit - pileup por HP
+
+-   É possível analisar por haplótipo:
+
+```{bash eval=FALSE, echo=TRUE}
+modkit pileup path/to/reads.bam output/directory/ --cpg --ref <reference.fasta> --partition-tag HP --prefix haplotyped
+
+```
+
+## Modkit - DMR
+
+```{bash eval=FALSE, echo=TRUE}
+# Gerar os pileups para as amostras individualmente
+
+# bgzip e tabix para os beds
+bgzip -k ${pileup}
+tabix -p bed ${pileup}.gz
+
+# dmr pair para pares
+modkit dmr pair -a {amostra1.bed.gz} -b {amostra2.bed.gz} -o {output_dir} -r {regioes.bed} --ref {genoma.fa} --base C --threads 10
+```
+
+## Modkit - entropy
+
+```{bash eval=FALSE, echo=TRUE}
+modkit entropy --in-bam ${mod_bam} \
+ -o ${output_directory} \
+ --regions ${regions_bed_file} \  # BED3 or BED4 file of regions
+ --cpg \  # specify CpG dinucleotides and combine strands
+ --ref ${ref} \
+ --threads 10
+```
+
+## Modkit - extras
+
+-   [Localize](https://nanoporetech.github.io/modkit/intro_localize.html)
+
+-   [Open Chromatin](https://nanoporetech.github.io/modkit/intro_open_chromatin.html)
